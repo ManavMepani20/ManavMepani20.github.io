@@ -1,87 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Manav Mepani | Robotics Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+<meta charset="UTF-8">
+<title>Manav Mepani | Robotics Engineer</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
 </head>
 <body>
 
 <nav>
-    <div class="logo">Manav Mepani</div>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+  <div class="logo">Manav Mepani</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <header>
-    <h1>Mechanical Engineer | Robotics | Automation</h1>
-    <p>Designing intelligent mechanical systems with real-world impact.</p>
-    <a href="Resume (Manav M.).pdf" class="btn" download>Download Resume</a>
+  <h1>Robotics | Mechanical Design | Automation</h1>
+  <a href="Resume (Manav M.).pdf" class="btn" download>Download Resume</a>
 </header>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>
-        MS in Robotics with strong foundations in mechanical design,
-        computer vision, automation, and control systems. Experienced in
-        industrial robotics, CAD modeling, and algorithm development.
-    </p>
-</section>
-
 <section id="projects">
-    <h2>Projects</h2>
+<h2>Projects</h2>
 
-    <div class="project-card">
-        <img src="images/onion.jpg">
-        <h3>Autonomous Onion Harvester</h3>
-        <p>Energy-aware path planning robot with battery monitoring and return-to-base logic.</p>
-    </div>
+<div class="project-grid">
 
-    <div class="project-card">
-        <img src="images/vr_robot.jpg">
-        <h3>VR-Controlled 6-DOF Robot</h3>
-        <p>Benchmarked 4 inverse kinematics algorithms for real-time teleoperation.</p>
-    </div>
+  <!-- PROJECT TILE -->
+  <div class="project-tile" onclick="openModal('ikModal')">
+    <img src="logos/university.png" class="company-logo">
+    <h3>6-DOF IK Benchmarking</h3>
+    <p>Compared 4 inverse kinematics solvers for real-time VR teleoperation.</p>
+  </div>
 
-    <div class="project-card">
-        <img src="images/rover.jpg">
-        <h3>Rocker-Bogie Rover Optimization</h3>
-        <p>Optimized mechanism parameters using Simulated Annealing for enhanced mobility.</p>
-    </div>
+  <div class="project-tile" onclick="openModal('harvesterModal')">
+    <img src="logos/company1.png" class="company-logo">
+    <h3>Autonomous Onion Harvester</h3>
+    <p>Designed energy-aware robotic harvesting system for small farms.</p>
+  </div>
 
+</div>
 </section>
 
-<section id="skills">
-    <h2>Technical Skills</h2>
-    <div class="skills-grid">
-        <div>SolidWorks</div>
-        <div>ANSYS</div>
-        <div>MATLAB</div>
-        <div>Python</div>
-        <div>ROS</div>
-        <div>Computer Vision</div>
-        <div>GD&T</div>
-        <div>Manufacturing Design</div>
-    </div>
+<!-- MODAL TEMPLATE -->
+<div id="ikModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('ikModal')">&times;</span>
+    <h2>6-DOF IK Benchmarking</h2>
+    <img src="images/project1_1.jpg" class="modal-img">
+    <p>Implemented NR, I-DLS, SVD-DLS, and PSO algorithms for a 6-DOF manipulator. Evaluated convergence speed, joint displacement, and computational efficiency.</p>
+
+    <video controls class="modal-video">
+      <source src="videos/ik_demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <a href="reports/ik_report.pdf" class="btn" download>Download Full Report</a>
+  </div>
+</div>
+
+<section id="publications">
+<h2>Publications</h2>
+
+<div class="publication">
+  <h3>Title of Your Paper</h3>
+  <p>Published in XYZ Conference 2025</p>
+  <a href="link_to_publication.pdf">View Publication</a>
+</div>
+
 </section>
 
 <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: your.email@email.com</p>
-    <p>
-        <a href="https://github.com/yourusername">GitHub</a> |
-        <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
-    </p>
+<h2>Connect With Me</h2>
+<a href="https://github.com/yourusername">GitHub</a>
+<a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+<a href="https://grabcad.com/yourprofile">GrabCAD</a>
 </section>
-
-<footer>
-    © 2026 Manav Mepani
-</footer>
 
 </body>
 </html>
