@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-  IMAGES REQUIRED — create an "images/" folder next to index.html and rename/copy files as follows:
-    images/gearbox_render.jpg        ← rename: 1771889220202_Two_stage_reverted_Gearbox.JPG
-    images/gearbox_exploded.png      ← rename: 1771889220206_Gearbox_exploded_view.PNG
-    images/robocon_bluebot.jpg       ← rename: 1771889220203_Blue_bot_builder_Rendered_image.JPG
-    images/robocon_tr.png            ← rename: 1771889220205_TR.png
-    images/robocon_ansys.jpg         ← rename: (ANSYS screenshot — the FEA deformation image, no numbered filename given)
-    images/can_filling_machine.jpg   ← rename: 1771889220203_Can_seaming_and_filling_machine.jpg
-    images/cooking_system.jpg        ← rename: 1771889220203_Cooking_system_Complete_model.JPG
-    images/harvester_render.jpg      ← rename: 1771889220206_Harvester_rendered_image.JPG
-    images/crimping_render.jpg       ← rename: 1771889220206_Crimping_tool_Rendered_Image.JPG
-    images/crimping_exploded.jpg     ← rename: 1771889220206_Crimping_tool_exploded_view.jpg
-  NOTE: The Grasshopper render (1771889220204_Grasshopper_Rendered_image.JPG) is not yet used — 
-        add to harvester modal or rover modal as desired.
--->
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -605,7 +591,7 @@
     <span class="close" onclick="closeModal('harvesterModal')">&times;</span>
     <h2>Autonomous Onion Harvester</h2>
     <p class="modal-subtitle">Technology Innovation Hub, IIT Bombay · Project Research Assistant · Jun 2022–Aug 2023</p>
-    <img src="Images/Harvester rendered image.jpg" class="modal-img" alt="Autonomous Onion Harvester — CAD Render">
+    <img src="Images/Harvester rendered image.JPG" class="modal-img" alt="Autonomous Onion Harvester — CAD Render">
     <p class="modal-text">Designed and manufactured a complete autonomous robotic harvesting system for small farm environments. The robot navigates fields independently, harvests onions with a custom end-effector, and returns to base automatically on low battery.</p>
     <ul class="modal-highlights">
       <li>Developed an Energy-Aware Path Planning algorithm to maximize field coverage per charge cycle</li>
@@ -717,7 +703,7 @@
     <span class="close" onclick="closeModal('cookingArmModal')">&times;</span>
     <h2>Autonomous Cooking System — Undergrad Thesis</h2>
     <p class="modal-subtitle">SPCE · Undergrad Thesis · Aug 2021–May 2022</p>
-    <img src="Images/Cooking system Complete model.jpg" class="modal-img" alt="Autonomous Cooking System — Full CAD Model with Robot Arm, Dispensers & Cooktop">
+    <img src="Images/Cooking system Complete model.JPG" class="modal-img" alt="Autonomous Cooking System — Full CAD Model with Robot Arm, Dispensers & Cooktop">
     <p class="modal-text">Designed, fabricated, and validated a 6-DOF PUMA-configured robotic arm for autonomous culinary assistance — targeting three Indian recipes (Bhindi Masala, Pav Bhaji, Dosa). The system integrates a carousel solid-ingredient dispenser, liquid/batter dispensers, and a three-fingered claw end-effector.</p>
     <ul class="modal-highlights">
       <li>Optimized link lengths via Simulated Annealing to minimize peak joint torque; shoulder torque = 616.89 Ncm, elbow = 357.22 Ncm, wrist = 239.93 Ncm at full horizontal extension</li>
@@ -739,7 +725,7 @@
     <span class="close" onclick="closeModal('crimpingModal')">&times;</span>
     <h2>Pulley-Driven Crimping Tool Attachment</h2>
     <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
-    <img src="Images/Crimping tool Rendered Image.jpg" class="modal-img" alt="Crimping Tool — SolidWorks Render">
+    <img src="Images/Crimping tool Rendered Image.JPG" class="modal-img" alt="Crimping Tool — SolidWorks Render">
     <img src="Images/Crimping tool exploded view.jpg" class="modal-img" alt="Crimping Tool — Exploded View with BOM (20 components)" style="margin-top:0">
     <p class="modal-text">Designed a motorized crimping tool attachment to eliminate the large manual forces that cause repetitive strain injury (carpal tunnel syndrome) in manufacturing workers. The device uses a 5-pulley rope drive system actuated by a DC motor and Li-Po battery — achieving crimp forces that would otherwise require dangerous manual effort.</p>
     <ul class="modal-highlights">
@@ -764,8 +750,8 @@
     <span class="close" onclick="closeModal('gearboxModal')">&times;</span>
     <h2>Two-Stage Reverted Helical Gearbox</h2>
     <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
-    <img src="Images/Two stage reverted Gearbox.jpg" class="modal-img" alt="Two-Stage Reverted Helical Gearbox — SolidWorks Render">
-    <img src="Images/Gearbox exploded view.png" class="modal-img" alt="Gearbox Exploded View with BOM" style="margin-top:0">
+    <img src="Images/Two stage reverted Gearbox.JPG" class="modal-img" alt="Two-Stage Reverted Helical Gearbox — SolidWorks Render">
+    <img src="Images/Gearbox exploded view.PNG" class="modal-img" alt="Gearbox Exploded View with BOM" style="margin-top:0">
     <p class="modal-text">Designed a complete two-stage reverted helical gearbox to deliver 49 kW at 95% efficiency, reducing speed from 1000 RPM to 179 RPM (gear ratio 5.59:1). All components — gears, shafts, bearings, keys, and lubrication — were designed from first principles against a full set of client specifications.</p>
     <ul class="modal-highlights">
       <li>Gear parameters: 19-45 tooth combination (optimized via Python iteration for coprime teeth, minimal center distance, and equal stage ratios), module mn = 8 mm, helix angle 25°, 20° pressure angle, 0.55% Carbon Chromium Steel (UTS 850 MPa, 500 BHN)</li>
