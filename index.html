@@ -74,8 +74,8 @@ header {
 .hero-orb { position: absolute; right: -80px; top: 45%; transform: translateY(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.06) 0%, rgba(99,102,241,0.04) 50%, transparent 70%); pointer-events: none; animation: orbpulse 10s ease-in-out infinite; }
 .hero-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; font-weight: 500; opacity: 0; animation: fadeUp 0.7s 0.15s forwards; display: flex; align-items: center; gap: 10px; }
 .hero-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
-h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.6rem, 5.5vw, 5.2rem); line-height: 1.08; letter-spacing: -0.03em; max-width: 820px; font-weight: 800; color: var(--text); opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
-h1 em { font-style: italic; color: var(--accent); font-family: 'DM Serif Display', serif; font-weight: 400; }
+h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5.5vw, 5rem); line-height: 1.12; letter-spacing: -0.01em; max-width: 820px; font-weight: 700; color: var(--text); opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+h1 em { font-style: italic; color: var(--accent); font-family: 'Playfair Display', serif; font-weight: 700; }
 .hero-desc { font-size: 0.9rem; color: var(--text-soft); max-width: 460px; line-height: 1.8; margin-top: 24px; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.45s forwards; }
 .hero-tags { display: flex; gap: 8px; margin-top: 32px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
 .tag { font-size: 0.68rem; letter-spacing: 0.06em; font-weight: 500; color: var(--text-soft); background: var(--surface2); border: 1px solid var(--border2); padding: 5px 12px; border-radius: 20px; }
@@ -183,6 +183,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
 @keyframes orbpulse { 0%,100% { transform:translateY(-50%) scale(1); opacity:0.7; } 50% { transform:translateY(-50%) scale(1.06); opacity:1; } }
 .reveal { opacity:0; transform:translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
@@ -205,17 +206,30 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 
   .nav-links {
     display: none;
-    position: fixed; inset: 0;
-    flex-direction: column; justify-content: center; align-items: center;
-    gap: 36px; z-index: 250;
+    position: fixed; top: 52px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch;
+    gap: 0; z-index: 250;
     background: rgba(13,15,20,0.98); backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0 16px;
   }
-  .nav-links.is-open { display: flex; animation: fadeIn 0.2s ease; }
-  .nav-links a { font-size: 1rem; letter-spacing: 0.1em; }
-  .nav-resume { font-size: 0.9rem; padding: 12px 32px; }
+  .nav-links.is-open { display: flex; animation: slideDown 0.22s ease; }
+  .nav-links a {
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    text-align: left;
+  }
+  .nav-links a:last-of-type { border-bottom: none; }
+  .nav-resume {
+    font-size: 0.8rem; padding: 12px 28px;
+    margin: 8px 20px 0; border-radius: 6px;
+    justify-content: center;
+  }
 
   header { padding: 88px 20px 52px; }
-  h1 { font-size: clamp(2rem, 8.5vw, 3rem); }
+  h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
   .hero-desc { font-size: 0.85rem; max-width: 100%; }
   .hero-tags { gap: 6px; }
   .tag { font-size: 0.64rem; padding: 4px 10px; }
@@ -296,7 +310,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <div class="about-bio reveal">
       <p class="about-text">I'm a Robotics Engineer pursuing my MS at Worcester Polytechnic Institute (WPI) with a perfect 4.0 GPA, building on a strong B.Tech in Mechanical Engineering from SPCE, India (9.04/10 CGPA).</p>
       <p class="about-text">Currently interning as an Automation Support Engineer at EssilorLuxottica–GENTEX, where I deploy vision-based inspection systems, troubleshoot and program industrial robotic arms, and resolve mechanical and software faults to minimize production downtime.</p>
-      <p class="about-text">My work spans the full robotics stack — from SolidWorks CAD and ANSYS FEA through to motion planning, embedded control, and real-world deployment. I'm driven by problems where physical engineering and intelligent systems have to work together.</p>
+      <p class="about-text">My work spans the full robotics stack , from SolidWorks CAD and ANSYS FEA through to motion planning, embedded control, and real-world deployment. I'm driven by problems where physical engineering and intelligent systems have to work together.</p>
       <div class="about-meta">
         <div class="about-meta-item">
           <span class="about-meta-label">Current</span>
@@ -353,8 +367,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       </div>
       <div class="project-tile" onclick="openModal('innovationStoryModal')">
         <div class="tile-top"><img src="logos/TIS.png" class="company-logo" alt="The Innovation Story"><span class="tile-arrow">↗</span></div>
-        <h3>Competition Robots — The Innovation Story</h3>
-        <p>Designed and manufactured two competition robots — Blue Bot Builder and Grasshopper — achieving ~90% reliability within three months using innovative mechanisms and in-house manufacturing.</p>
+        <h3>Competition Robots: The Innovation Story</h3>
+        <p>Designed and manufactured two competition robots: Blue Bot Builder and Grasshopper, achieving ~90% reliability within three months using innovative mechanisms and in-house manufacturing.</p>
         <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">CNC / Manufacturing</span><span class="tile-tag">Mechatronics</span></div>
       </div>
       <div class="project-tile" onclick="openModal('harvesterModal')">
@@ -371,7 +385,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       </div>
       <div class="project-tile" onclick="openModal('reverseEngModal')">
         <div class="tile-top"><img src="logos/prolific 3d tech.jpg" class="company-logo" alt="Prolific 3D Tech"><span class="tile-arrow">↗</span></div>
-        <h3>Can Filling Machine — Reverse Engineering</h3>
+        <h3>Can Filling Machine: Reverse Engineering</h3>
         <p>Reverse engineered a 50+ component Can Filling and Seaming Machine, producing fully constrained 3D assemblies and GD&amp;T drawings in SolidWorks.</p>
         <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">GD&amp;T</span><span class="tile-tag">Reverse Engineering</span></div>
       </div>
@@ -399,26 +413,26 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       </div>
       <div class="project-tile" onclick="openModal('ros2Modal')">
         <div class="tile-top"><img src="logos/WPI.png" class="company-logo" alt="WPI"><span class="tile-arrow">↗</span></div>
-        <h3>Robotic Arm Control — ROS 2</h3>
+        <h3>Robotic Arm Control: ROS 2</h3>
         <p>Built Python ROS2 nodes for velocity kinematics, incremental position control, linear path motion, and a PD controller (Kp=0.19, Kd=0.03) at 100 Hz using Jacobian pseudoinverse methods.</p>
         <div class="tile-tags"><span class="tile-tag">ROS2</span><span class="tile-tag">Python</span><span class="tile-tag">Jacobian / IK</span></div>
       </div>
       <div class="project-tile" onclick="openModal('cookingArmModal')">
         <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
-        <h3>Autonomous Cooking System — Undergrad Thesis</h3>
-        <p>Designed, fabricated, and controlled a 6-DOF PUMA robotic arm for autonomous cooking — shoulder torque 616.89 Ncm, ±1° joint accuracy, 42.7 kg-cm payload validated on physical prototype.</p>
+        <h3>Autonomous Cooking System: Undergrad Thesis</h3>
+        <p>Designed, fabricated, and controlled a 6-DOF PUMA robotic arm for autonomous cooking , shoulder torque 616.89 Ncm, ±1° joint accuracy, 42.7 kg-cm payload validated on physical prototype.</p>
         <div class="tile-tags"><span class="tile-tag">Webots / ROS</span><span class="tile-tag">ANSYS / FEA</span><span class="tile-tag">Arduino / PID</span></div>
       </div>
       <div class="project-tile" onclick="openModal('crimpingModal')">
         <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
         <h3>Pulley-Driven Crimping Tool</h3>
-        <p>Designed a motorized 5-pulley crimping attachment with mechanical advantage of 6, delivering 1000 N crimping force in under 4 seconds — eliminating manual effort to prevent repetitive strain injury.</p>
+        <p>Designed a motorized 5-pulley crimping attachment with mechanical advantage of 6, delivering 1000 N crimping force in under 4 seconds , eliminating manual effort to prevent repetitive strain injury.</p>
         <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">Pulley / Linkage</span><span class="tile-tag">Machine Design</span></div>
       </div>
       <div class="project-tile" onclick="openModal('gearboxModal')">
         <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
         <h3>Two-Stage Reverted Helical Gearbox</h3>
-        <p>Designed a 49 kW, 1000→179 RPM two-stage helical gearbox with gear life >17,800 hrs, SKF bearing life >12,500 hrs, and noise below 85 dB — full SolidWorks model and GD&amp;T drawings.</p>
+        <p>Designed a 49 kW, 1000→179 RPM two-stage helical gearbox with gear life >17,800 hrs, SKF bearing life >12,500 hrs, and noise below 85 dB , with full SolidWorks model and GD&amp;T drawings.</p>
         <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">Helical Gear Design</span><span class="tile-tag">GrabCAD</span></div>
       </div>
     </div>
@@ -433,8 +447,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <div class="project-grid">
       <div class="project-tile" onclick="openModal('roboconModal')">
         <div class="tile-top"><img src="logos/SPCE ROBOCON.jpg" class="company-logo" alt="SPCE ROBOCON"><span class="tile-arrow">↗</span></div>
-        <h3>SPCE ROBOCON — Technical Member &amp; Team Captain</h3>
-        <p>4 years of national DD Robocon competition — Technical Member (AIR 9 twice, 2019 &amp; 2020) and Team Captain (AIR 19, 2021). Designed kicking, claw, and throwing mechanisms with ADAMS-validated 7.5 m/s launch and 97%+ repeatability.</p>
+        <h3>SPCE ROBOCON: Technical Member &amp; Team Captain</h3>
+        <p>4 years of national DD Robocon competition : Technical Member (AIR 9 twice, 2019 &amp; 2020) and Team Captain (AIR 19, 2021). Designed kicking, claw, and throwing mechanisms with ADAMS-validated 7.5 m/s launch and 97%+ repeatability.</p>
         <div class="tile-tags"><span class="tile-tag">ADAMS / ANSYS</span><span class="tile-tag">CATIA V5</span><span class="tile-tag">Team Leadership</span></div>
       </div>
     </div>
@@ -482,17 +496,17 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <div id="innovationStoryModal" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal('innovationStoryModal')">&times;</button>
-    <h2>Competition Robots — The Innovation Story</h2>
+    <h2>Competition Robots: The Innovation Story</h2>
     <p class="modal-subtitle">The Innovation Story, India · Mechanical Design Engineer (Robotics) · Aug 2023–Apr 2024</p>
     <figure class="modal-figure">
-      <img src="Images/Blue bot builder Rendered image.JPG" class="modal-img" alt="Blue Bot Builder — SolidWorks Render">
-      <figcaption class="modal-caption">Blue Bot Builder — SolidWorks Render</figcaption>
+      <img src="Images/Blue bot builder Rendered image.JPG" class="modal-img" alt="Blue Bot Builder : SolidWorks Render">
+      <figcaption class="modal-caption">Blue Bot Builder : SolidWorks Render</figcaption>
     </figure>
     <figure class="modal-figure">
-      <img src="Images/Grasshopper Rendered image.JPG" class="modal-img" alt="Grasshopper — SolidWorks Render">
-      <figcaption class="modal-caption">Grasshopper — SolidWorks Render</figcaption>
+      <img src="Images/Grasshopper Rendered image.JPG" class="modal-img" alt="Grasshopper : SolidWorks Render">
+      <figcaption class="modal-caption">Grasshopper : SolidWorks Render</figcaption>
     </figure>
-    <p class="modal-text">Designed and manufactured two competition robots — <strong style="color:var(--text)">Blue Bot Builder</strong> and <strong style="color:var(--text)">Grasshopper</strong> — for national-level game challenges, achieving ~90% reliability within three months entirely through in-house manufacturing, while simultaneously coaching 20 students.</p>
+    <p class="modal-text">Designed and manufactured two competition robots <strong style="color:var(--text)">Blue Bot Builder</strong> and <strong style="color:var(--text)">Grasshopper</strong> for national-level game challenges, achieving ~90% reliability within three months entirely through in-house manufacturing, while simultaneously coaching 20 students.</p>
     <ul class="modal-highlights">
       <li>Blue Bot Builder: precise actuators and rigid modular chassis optimised for repeatability under competition pressure</li>
       <li>Grasshopper: linkage-based mechanism for a dynamic traversal challenge, iterated rapidly through prototyping</li>
@@ -514,8 +528,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <h2>Autonomous Onion Harvester</h2>
     <p class="modal-subtitle">Technology Innovation Hub, IIT Bombay · Project Research Assistant · Jun 2022–Aug 2023</p>
     <figure class="modal-figure">
-      <img src="Images/Harvester rendered image.JPG" class="modal-img" alt="Autonomous Onion Harvester — CAD Render">
-      <figcaption class="modal-caption">Autonomous Onion Harvester — CAD Render</figcaption>
+      <img src="Images/Harvester rendered image.JPG" class="modal-img" alt="Autonomous Onion Harvester : CAD Render">
+      <figcaption class="modal-caption">Autonomous Onion Harvester : CAD Render</figcaption>
     </figure>
     <p class="modal-text">Designed and manufactured a complete autonomous robotic harvesting system for small farm environments. The robot navigates fields independently, harvests onions with a custom end-effector, and returns to base automatically on low battery.</p>
     <ul class="modal-highlights">
@@ -560,11 +574,11 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <div id="reverseEngModal" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal('reverseEngModal')">&times;</button>
-    <h2>Can Filling Machine — Reverse Engineering</h2>
+    <h2>Can Filling Machine: Reverse Engineering</h2>
     <p class="modal-subtitle">Prolific 3D Tech · Intern Design Engineer · Jun–Jul 2021</p>
     <figure class="modal-figure">
-      <img src="Images/Can seaming and filling machine.jpg" class="modal-img" alt="Can Filling & Seaming Machine — SolidWorks Model">
-      <figcaption class="modal-caption">Can Filling &amp; Seaming Machine — SolidWorks Reverse-Engineering Model</figcaption>
+      <img src="Images/Can seaming and filling machine.jpg" class="modal-img" alt="Can Filling & Seaming Machine : SolidWorks Model">
+      <figcaption class="modal-caption">Can Filling &amp; Seaming Machine : SolidWorks Reverse-Engineering Model</figcaption>
     </figure>
     <p class="modal-text">Led reverse engineering of a 50+ component Can Filling and Seaming Machine. Took precise physical measurements of all sub-assemblies and produced complete 3D CAD models and 2D manufacturing drawings in SolidWorks ready for fabrication.</p>
     <ul class="modal-highlights">
@@ -633,20 +647,20 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <div id="ros2Modal" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal('ros2Modal')">&times;</button>
-    <h2>Robotic Arm Control — ROS 2</h2>
+    <h2>Robotic Arm Control: ROS 2</h2>
     <p class="modal-subtitle">WPI · Graduate Projects (RBE 500) · Oct–Dec 2024</p>
-    <p class="modal-text">A series of progressively complex ROS 2 control implementations for the OpenManipulator-X — from velocity-level kinematics and linear path motion through to a from-scratch PD controller running at 100 Hz in current control mode.</p>
+    <p class="modal-text">A series of progressively complex ROS 2 control implementations for the OpenManipulator-X , from velocity-level kinematics and linear path motion through to a from-scratch PD controller running at 100 Hz in current control mode.</p>
     <ul class="modal-highlights">
       <li>Built 3 Python ROS2 nodes: vel_kinematics (Jacobian &amp; twist), vel_calc (incremental joint positions), vel_pub (constant twist publisher) for linear Cartesian path execution</li>
       <li>Implemented Jacobian matrix and Moore-Penrose pseudoinverse for joint-velocity resolution</li>
       <li>PD controller for Actuator 4 in current control mode (DYNAMIXEL X, 1 MHz baud); effort = Kp·error − Kd·derivative</li>
-      <li>Tuned Kp = 0.19, Kd = 0.03 — fast convergence, minimal overshoot across 3 reference tests: 930→2000, 2180→1500, 930→1800 encoder units</li>
+      <li>Tuned Kp = 0.19, Kd = 0.03 , fast convergence, minimal overshoot across 3 reference tests: 930→2000, 2180→1500, 930→1800 encoder units</li>
       <li>Logged 10 s of data at 100 Hz; visualised with Python/matplotlib</li>
     </ul>
     <div class="video-placeholder">
       <div class="video-placeholder-icon">▶</div>
       <div class="video-placeholder-text">
-        <strong>Video — drop in when ready</strong>
+        <strong>Video drop in when ready</strong>
         Save file as: <code>videos/ros2_control.mp4</code>
       </div>
     </div>
@@ -662,20 +676,20 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <div id="cookingArmModal" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal('cookingArmModal')">&times;</button>
-    <h2>Autonomous Cooking System — Undergrad Thesis</h2>
+    <h2>Autonomous Cooking System: Undergrad Thesis</h2>
     <p class="modal-subtitle">SPCE · Undergrad Thesis · Aug 2021–May 2022</p>
     <figure class="modal-figure">
-      <img src="Images/Cooking system Complete model.JPG" class="modal-img" alt="Autonomous Cooking System — Full CAD Assembly">
-      <figcaption class="modal-caption">Full System CAD Assembly — Robot Arm, Dispensers &amp; Cooktop</figcaption>
+      <img src="Images/Cooking system Complete model.JPG" class="modal-img" alt="Autonomous Cooking System : Full CAD Assembly">
+      <figcaption class="modal-caption">Full System CAD Assembly : Robot Arm, Dispensers &amp; Cooktop</figcaption>
     </figure>
-    <p class="modal-text">Designed, fabricated, and validated a 6-DOF PUMA-configured robotic arm for autonomous culinary assistance — targeting three Indian recipes (Bhindi Masala, Pav Bhaji, Dosa). The system integrates a carousel solid-ingredient dispenser, liquid/batter dispensers, and a three-fingered claw end-effector.</p>
+    <p class="modal-text">Designed, fabricated, and validated a 6-DOF PUMA-configured robotic arm for autonomous culinary assistance targeting three Indian recipes (Bhindi Masala, Pav Bhaji, Dosa). The system integrates a carousel solid-ingredient dispenser, liquid/batter dispensers, and a three-fingered claw end-effector.</p>
     <ul class="modal-highlights">
       <li>Optimised link lengths via Simulated Annealing; shoulder torque = 616.89 Ncm, elbow = 357.22 Ncm, wrist = 239.93 Ncm at full extension</li>
-      <li>ANSYS static structural FEA on aluminium links (1 mm wall) and transient thermal analysis — validated within ~8% error across 30–125°C</li>
+      <li>ANSYS static structural FEA on aluminium links (1 mm wall) and transient thermal analysis validated within ~8% error across 30–125°C</li>
       <li>Simulated IK using geometric kinematic decoupling in Webots (Python); C²-continuous sin² velocity profiles for smooth trajectories</li>
       <li>Arduino Mega control with 10-turn potentiometers; 0.4° sensor resolution, corrected to ±1° via linear regression calibration</li>
       <li>Payload ≥42.7 kg-cm at joint 1; 5 of 6 DOF operational on physical prototype</li>
-      <li>Published in Materials Today: Proceedings, ICAME22 (2022) — Vol. 68, Part 6, pp. 1930–1945</li>
+      <li>Published in Materials Today: Proceedings, ICAME22 (2022) Vol. 68, Part 6, pp. 1930–1945</li>
     </ul>
     <video controls class="modal-video">
       <source src="Images/Robotic arm B_Tech.mp4" type="video/mp4">
@@ -694,17 +708,17 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <h2>Pulley-Driven Crimping Tool Attachment</h2>
     <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
     <figure class="modal-figure">
-      <img src="Images/Crimping tool Rendered Image.JPG" class="modal-img" alt="Crimping Tool — SolidWorks Render">
-      <figcaption class="modal-caption">Rendered Assembly — SolidWorks</figcaption>
+      <img src="Images/Crimping tool Rendered Image.JPG" class="modal-img" alt="Crimping Tool : SolidWorks Render">
+      <figcaption class="modal-caption">Rendered Assembly SolidWorks</figcaption>
     </figure>
     <figure class="modal-figure">
-      <img src="Images/Crimping tool exploded view.jpg" class="modal-img" alt="Crimping Tool — Exploded View with BOM">
+      <img src="Images/Crimping tool exploded view.jpg" class="modal-img" alt="Crimping Tool : Exploded View with BOM">
       <figcaption class="modal-caption">Exploded View with Bill of Materials (20 components)</figcaption>
     </figure>
     <p class="modal-text">Designed a motorised crimping tool attachment to eliminate the large manual forces that cause repetitive strain injury in manufacturing workers. The device uses a 5-pulley rope drive actuated by a DC motor and Li-Po battery.</p>
     <ul class="modal-highlights">
       <li>5-pulley rope drive provides mechanical advantage of 6; max load 1000 N (actual peak 678.76 N incl. self-weight and spring force)</li>
-      <li>Motor: Rhino IG32 12V, 686.7 Ncm at 30 RPM — full crimp cycle in 3.9 s (within 10 s requirement)</li>
+      <li>Motor: Rhino IG32 12V, 686.7 Ncm at 30 RPM , full crimp cycle in 3.9 s (within 10 s requirement)</li>
       <li>Wire rope: 6×19 fibre core, 3 mm dia, D/dr = 23, static FOS = 5.48, fatigue life 90,000 bends (≈7,500 crimp cycles)</li>
       <li>SKF 608 bearing, relubrication interval 12,300 hrs; 4-bar spring return (k = 0.1 N/mm) for passive open reset</li>
       <li>Envelope: 300×100×150 mm; weight &lt;5 kg; 12V Li-Po with DPDT forward/off/reverse switch</li>
@@ -723,8 +737,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <h2>Two-Stage Reverted Helical Gearbox</h2>
     <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
     <figure class="modal-figure">
-      <img src="Images/Two stage reverted Gearbox.JPG" class="modal-img" alt="Two-Stage Helical Gearbox — SolidWorks Render">
-      <figcaption class="modal-caption">Two-Stage Reverted Helical Gearbox — SolidWorks Render</figcaption>
+      <img src="Images/Two stage reverted Gearbox.JPG" class="modal-img" alt="Two-Stage Helical Gearbox : SolidWorks Render">
+      <figcaption class="modal-caption">Two-Stage Reverted Helical Gearbox : SolidWorks Render</figcaption>
     </figure>
     <figure class="modal-figure">
       <img src="Images/Gearbox exploded view.PNG" class="modal-img" alt="Gearbox Exploded View with BOM">
@@ -735,7 +749,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       <li>Gears: 19-45 tooth combo (Python-optimised), mn = 8 mm, helix 25°, 20° pressure angle; 0.55% Carbon Chromium Steel, UTS 850 MPa</li>
       <li>Gear life: 17,833 hrs (critical Gear 3, pitting), Gear 1 &gt;5.11×10⁶ hrs; Shigley's YN/ZN factors at 95% reliability</li>
       <li>Shafts (AISI 1040): Input ø50/30 mm hollow (L=178 mm), Intermediate ø80/48 mm (L=402 mm), Output ø90/54 mm (L=194 mm)</li>
-      <li>SKF bearings: 6210-2Z / 6216-2Z / 6218-2Z — lives 14,600 / 21,500 / 12,500 hrs; MT33 grease life up to 20,600 hrs</li>
+      <li>SKF bearings: 6210-2Z / 6216-2Z / 6218-2Z lives 14,600 / 21,500 / 12,500 hrs; MT33 grease life up to 20,600 hrs</li>
       <li>Lubrication: Shell Omala S2 G 320, calculated life 9,000 hrs; total weight 329.3 kg; noise &lt;85 dB at 1 m</li>
     </ul>
     <div class="modal-actions">
@@ -749,25 +763,25 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <div id="roboconModal" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal('roboconModal')">&times;</button>
-    <h2>SPCE ROBOCON — Technical Member &amp; Team Captain</h2>
+    <h2>SPCE ROBOCON: Technical Member &amp; Team Captain</h2>
     <p class="modal-subtitle">SPCE · Technical Member Sep 2018–Aug 2020 · Team Captain Aug 2020–Aug 2021</p>
     <figure class="modal-figure">
-      <img src="Images/robocon_tr.png" class="modal-img" alt="2021 Throwing Robot — CATIA V5 Render">
-      <figcaption class="modal-caption">2021 Throwing Robot (TR) — CATIA V5 Render</figcaption>
+      <img src="Images/robocon_tr.png" class="modal-img" alt="2021 Throwing Robot : CATIA V5 Render">
+      <figcaption class="modal-caption">2021 Throwing Robot (TR) : CATIA V5 Render</figcaption>
     </figure>
     <figure class="modal-figure">
-      <img src="Images/robocon_bluebot.jpg" class="modal-img" alt="2020 Full Robot Assembly — CAD Render">
-      <figcaption class="modal-caption">2020 Full Robot Assembly — CAD Render</figcaption>
+      <img src="Images/robocon_bluebot.jpg" class="modal-img" alt="2020 Full Robot Assembly : CAD Render">
+      <figcaption class="modal-caption">2020 Full Robot Assembly : CAD Render</figcaption>
     </figure>
     <figure class="modal-figure">
-      <img src="Images/robocon_ansys.jpg" class="modal-img" alt="ANSYS FEA — TR Chassis Total Deformation">
-      <figcaption class="modal-caption">ANSYS FEA — Try Robot Chassis Total Deformation (max 0.446 mm)</figcaption>
+      <img src="Images/robocon_ansys.jpg" class="modal-img" alt="ANSYS FEA : TR Chassis Total Deformation">
+      <figcaption class="modal-caption">ANSYS FEA Try Robot Chassis Total Deformation (max 0.446 mm)</figcaption>
     </figure>
-    <p class="modal-text">Four years of national DD Robocon competition, progressing from technical team member to team captain. Managed the full project lifecycle — design, ADAMS/ANSYS analysis, fabrication, and 35-person team coordination — including through COVID-19 restrictions.</p>
+    <p class="modal-text">Four years of national DD Robocon competition, progressing from technical team member to team captain. Managed the full project lifecycle design, ADAMS/ANSYS analysis, fabrication, and 35-person team coordination including through COVID-19 restrictions.</p>
     <ul class="modal-highlights">
-      <li><strong style="color:var(--text)">Team Captain — AIR 19, Robocon 2021</strong> "Throwing Arrows Into Pots": Led design and CAD modelling; ADAMS-validated launch velocity 7.5 m/s, angle 58.6° (target 60°), range z=5 m, y=−0.073 m; TR housed 3 arms with τ=4.2–4.4 N-m and &gt;97% repeatability</li>
-      <li><strong style="color:var(--text)">Technical Member — AIR 9, Robocon 2020</strong> "ROBO RUGBY 7s": Designed a kicking mechanism using elastic energy to launch a rugby ball through goal posts; separate coupling/decoupling mechanism for reloading; ANSYS chassis deformation 0.1854 mm (PR) / 0.4461 mm (TR)</li>
-      <li><strong style="color:var(--text)">Technical Member — AIR 9, Robocon 2019</strong> "Sharing the Knowledge": Designed claw mechanism to pick and throw ball from rack, simplifying system design; contributed to quadruped robot with ADAMS-validated creep/trot gaits and worm-gear knee joints (z1/z2 = 1/32)</li>
+      <li><strong style="color:var(--text)">Team Captain : AIR 19, Robocon 2021</strong> "Throwing Arrows Into Pots": Led design and CAD modelling; ADAMS-validated launch velocity 7.5 m/s, angle 58.6° (target 60°), range z=5 m, y=−0.073 m; TR housed 3 arms with τ=4.2–4.4 N-m and &gt;97% repeatability</li>
+      <li><strong style="color:var(--text)">Technical Member : AIR 9, Robocon 2020</strong> "ROBO RUGBY 7s": Designed a kicking mechanism using elastic energy to launch a rugby ball through goal posts; separate coupling/decoupling mechanism for reloading; ANSYS chassis deformation 0.1854 mm (PR) / 0.4461 mm (TR)</li>
+      <li><strong style="color:var(--text)">Technical Member : AIR 9, Robocon 2019</strong> "Sharing the Knowledge": Designed claw mechanism to pick and throw ball from rack, simplifying system design; contributed to quadruped robot with ADAMS-validated creep/trot gaits and worm-gear knee joints (z1/z2 = 1/32)</li>
       <li>Holonomic 3-wheel drive (ø100 mm omni wheels); dual-camera + red laser image processing for distance estimation; TFMini LIDAR for autonomous positioning</li>
     </ul>
     <div class="modal-actions">
@@ -818,9 +832,9 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       <span class="contact-handle">Manav Mepani</span>
       <span class="contact-link-arrow">↗</span>
     </a>
-    <a href="mailto:mepanimanav@gmail.com" class="contact-link reveal" style="transition-delay:0.1s">
+    <a href="/cdn-cgi/l/email-protection#365b534657585f5b5758574076515b575f5a1855595b" class="contact-link reveal" style="transition-delay:0.1s">
       <span class="contact-platform">Email</span>
-      <span class="contact-handle">mepanimanav@gmail.com</span>
+      <span class="contact-handle"><span class="__cf_email__" data-cfemail="fc91998c9d9295919d929d8abc9b919d9590d29f9391">[email&#160;protected]</span></span>
       <span class="contact-link-arrow">↗</span>
     </a>
     <a href="https://github.com/ManavMepani20" class="contact-link reveal" target="_blank" style="transition-delay:0.15s">
@@ -841,7 +855,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <span>Worcester, MA · © 2025</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── CUSTOM CURSOR (pointer devices only) ── */
 const isFine = window.matchMedia('(pointer: fine)').matches;
 if (isFine) {
@@ -897,10 +911,4 @@ document.addEventListener('click', e=>{
 });
 
 /* ── SCROLL REVEAL ── */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{ threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-</script>
-</body>
-</html>
+const obser
