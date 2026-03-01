@@ -399,15 +399,29 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     </div>
   </div>
 
-  <div class="hero-name-block">
-    <p class="hero-role">Mechatronics Engineer </p>
-    <h1>
-      <span class="name-first">Manav</span>
-      <span class="name-last">Mepani</span>
-    </h1>
+<div class="hero-name-block">
+    <p class="hero-role">Mechatronics Engineer</p>
+    <div class="hero-name-photo">
+      <h1>
+        <span class="name-first">Manav</span>
+        <span class="name-last">Mepani</span>
+      </h1>
+      <!-- Photo slot: replace src with your photo path e.g. src="Images/photo.jpg" -->
+      <div class="hero-photo-slot">
+        <img src="Images/photo.jpg" alt="Manav Mepani"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          <span>Add your<br>photo here</span>
+        </div>
+      </div>
+    </div>
+    <p class="hero-tagline-headline">Where precision meets intelligent design.</p>
     <p class="hero-tagline">
-      Automation Support Intern · EssilorLuxottica<br>
-      MS in ing · Worcester Polytechnic Institute (WPI)
+      Automation Support Intern · EssilorLuxottica&ndash;GENTEX<br>
+      MS in Robotics Engineering · Worcester Polytechnic Institute (WPI)
     </p>
   </div>
 
