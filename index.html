@@ -105,6 +105,25 @@ h1 .name-last { display: block; color: var(--accent); font-style: italic; }
 
 .hero-tagline { font-size: 0.95rem; color: var(--text-soft); max-width: 480px; line-height: 1.8; margin-top: 28px; font-weight: 300; opacity: 0; animation: fadeUp 0.7s 0.45s forwards; }
 
+/* hero name + photo row */
+.hero-name-photo-row { display: flex; align-items: center; gap: 48px; justify-content: space-between; }
+.hero-name-text { flex: 1; }
+.hero-photo-slot {
+  flex-shrink: 0; width: 200px; height: 200px; border-radius: 50%;
+  border: 2px dashed rgba(94,234,212,0.4);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(94,234,212,0.04); overflow: hidden; transition: border-color 0.25s;
+}
+.hero-photo-slot:hover { border-color: rgba(94,234,212,0.75); }
+.hero-photo-label {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: var(--text-dim); font-size: 0.65rem; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer; transition: color 0.2s; padding: 16px;
+  text-align: center;
+}
+.hero-photo-label:hover { color: var(--accent); }
+.hero-photo-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+
 /* stats row */
 .hero-stats {
   display: flex; gap: 0; margin-top: 52px;
@@ -141,6 +160,7 @@ section { position: relative; z-index: 1; padding: 72px 56px; }
 section + section { border-top: 1px solid var(--border); }
 .section-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 2rem; letter-spacing: -0.025em; color: var(--text); line-height: 1.2; }
+#about .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em; }
 h2 em { font-style: italic; color: var(--accent); font-family: 'Playfair Display', serif; font-weight: 700; }
 .section-header { margin-bottom: 40px; }
 .section-line { width: 48px; height: 2px; background: var(--accent); margin-top: 14px; border-radius: 2px; }
@@ -166,6 +186,8 @@ h2 em { font-style: italic; color: var(--accent); font-family: 'Playfair Display
 .about-meta-item { display: flex; flex-direction: column; gap: 3px; }
 .about-meta-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
 .about-meta-value { font-size: 0.82rem; color: var(--text-soft); font-weight: 300; }
+.about-meta-sublabel { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: block; }
+.about-meta-subvalue { font-size: 0.78rem; color: var(--text-soft); font-weight: 300; }
 
 .skills-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
 .skills-card-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
@@ -343,6 +365,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   header { padding: 0 20px; }
   .hero-topbar { padding-top: 80px; flex-direction: column; align-items: flex-start; gap: 12px; }
   h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+  .hero-name-photo-row { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+  .hero-photo-slot { width: 130px; height: 130px; }
   .hero-stats { flex-direction: column; }
   .hero-stat { flex: none; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
   section { padding: 52px 20px; }
@@ -394,21 +418,33 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       Available for Opportunities
     </div>
     <div class="hero-contact-links">
-      <a href="mailto:mepanimanav@gmail.com">mepanimanav@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#1c71796c7d7275717d727d6a5c7b717d7570327f7371"><span class="__cf_email__" data-cfemail="d8b5bda8b9b6b1b5b9b6b9ae98bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a>
       <a href="tel:+17742289813">+1 (774) 228-9813</a>
     </div>
   </div>
 
   <div class="hero-name-block">
     <p class="hero-role">Mechatronics Engineer </p>
-    <h1>
-      <span class="name-first">Manav</span>
-      <span class="name-last">Mepani</span>
-    </h1>
-    <p class="hero-tagline">
-      Automation Support Intern · EssilorLuxottica<br>
-      MS in ing · Worcester Polytechnic Institute (WPI)
-    </p>
+    <div class="hero-name-photo-row">
+      <div class="hero-name-text">
+        <h1>
+          <span class="name-first">Manav</span>
+          <span class="name-last">Mepani</span>
+        </h1>
+        <p class="hero-tagline">
+          Automation Support Intern · EssilorLuxottica<br>
+          MS in ing · Worcester Polytechnic Institute (WPI)
+        </p>
+      </div>
+      <div class="hero-photo-slot">
+        <label for="heroPhotoInput" class="hero-photo-label" title="Click to upload your photo">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Add Photo</span>
+        </label>
+        <input type="file" id="heroPhotoInput" accept="image/*" style="display:none">
+        <img id="heroPhotoImg" class="hero-photo-img" src="" alt="Manav Mepani" style="display:none">
+      </div>
+    </div>
   </div>
 
   <div class="hero-stats">
@@ -465,10 +501,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
           <div class="about-meta-item">
             <span class="about-meta-label">Education</span>
             <span class="about-meta-value">MS ing · WPI · Aug 2024 – May 2026</span>
-          </div>
-          <div class="about-meta-item">
-            <span class="about-meta-label">Undergrad</span>
-            <span class="about-meta-value">B.Tech Mechanical Engineering · SPCE, India</span>
+            <span class="about-meta-sublabel">Undergrad</span>
+            <span class="about-meta-subvalue">B.Tech Mechanical Engineering · SPCE, India</span>
           </div>
           <div class="about-meta-item">
             <span class="about-meta-label">Location</span>
@@ -1383,9 +1417,9 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       <span class="contact-handle">Manav Mepani</span>
       <span class="contact-link-arrow">↗</span>
     </a>
-    <a href="mailto:mepanimanav@gmail.com" class="contact-link">
+    <a href="/cdn-cgi/l/email-protection#cda0a8bdaca3a4a0aca3acbb8daaa0aca4a1e3aea2a0" class="contact-link">
       <span class="contact-platform">Email</span>
-      <span class="contact-handle">mepanimanav@gmail.com</span>
+      <span class="contact-handle"><span class="__cf_email__" data-cfemail="aac7cfdacbc4c3c7cbc4cbdceacdc7cbc3c684c9c5c7">[email&#160;protected]</span></span>
       <span class="contact-link-arrow">↗</span>
     </a>
     <a href="tel:+17742289813" class="contact-link">
@@ -1411,7 +1445,26 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <span>Worcester, MA · © 2026</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* PHOTO UPLOAD */
+const heroPhotoInput = document.getElementById('heroPhotoInput');
+const heroPhotoImg   = document.getElementById('heroPhotoImg');
+const heroPhotoLabel = document.querySelector('.hero-photo-label');
+if (heroPhotoInput) {
+  heroPhotoInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        heroPhotoImg.src = e.target.result;
+        heroPhotoImg.style.display = 'block';
+        if (heroPhotoLabel) heroPhotoLabel.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
 /* CURSOR */
 const isFine = window.matchMedia('(pointer: fine)').matches;
 if (isFine) {
@@ -1499,18 +1552,4 @@ const statsObserver = new IntersectionObserver(entries=>{
         const numText = el.textContent.replace(spanMatch ? spanMatch.textContent : '','').trim();
         const num = parseInt(numText.replace(/[^0-9]/g,''),10);
         if(!num) return;
-        let count = 0; const inc = num/60;
-        const timer = setInterval(()=>{
-          count = Math.min(count+inc, num);
-          el.innerHTML = Math.floor(count) + spanHtml;
-          if(count>=num) clearInterval(timer);
-        }, 16);
-      });
-    }
-  });
-}, {threshold:0.5});
-const statsEl = document.querySelector('.hero-stats');
-if(statsEl) statsObserver.observe(statsEl);
-</script>
-</body>
-</html>
+        let count = 0; cons
