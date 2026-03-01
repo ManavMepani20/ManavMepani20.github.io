@@ -9,12 +9,12 @@
 <style>
 /* ── TOKENS ── */
 :root {
-  --bg: #0d0f14;
-  --surface: #13161d;
-  --surface2: #181c25;
-  --surface3: #1e2230;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.13);
+  --bg: #141922;
+  --surface: #1a2030;
+  --surface2: #202838;
+  --surface3: #252e42;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
   --text: #d4d8e8;
   --text-soft: #8892a4;
   --text-dim: #525c70;
@@ -30,8 +30,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 /* dot bg */
 body::before {
   content: ''; position: fixed; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.032) 1px, transparent 1px);
   background-size: 30px 30px; pointer-events: none; z-index: 0;
+}
+
+/* subtle blue ambient glow */
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background: radial-gradient(ellipse 140% 70% at 50% 0%, rgba(56,90,160,0.25) 0%, transparent 72%);
+  pointer-events: none; z-index: 0;
 }
 
 /* ── CURSOR ── */
@@ -47,7 +54,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 56px;
-  background: rgba(13,15,20,0.92); backdrop-filter: blur(20px);
+  background: rgba(20,25,34,0.94); backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
 .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
@@ -92,7 +99,7 @@ header {
 .hero-name-block {
   flex: 1; display: flex; flex-direction: row;
   align-items: center; justify-content: center;
-  gap: 80px; padding-bottom: 32px;
+  gap: 180px; padding-bottom: 32px;
 }
 .hero-name-text { display: flex; flex-direction: column; }
 
@@ -355,7 +362,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   .hero-stats { grid-template-columns: repeat(3, 1fr); }
   .hero-stat { padding: 20px 12px 16px; }
   .hero-stat:first-child { padding-left: 0; }
-  .hero-name-block { gap: 40px; }
+  .hero-name-block { gap: 60px; }
   .hero-photo-wrap { width: 160px; height: 160px; }
 }
 @media (max-width: 768px) {
@@ -364,7 +371,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   .nav-links {
     display: none; position: fixed; top: 53px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0; z-index: 250;
-    background: rgba(13,15,20,0.97); backdrop-filter: blur(20px);
+    background: rgba(20,25,34,0.97); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border2); padding-bottom: 12px;
   }
   .nav-links.is-open { display: flex; animation: slideDown 0.2s ease; }
@@ -488,7 +495,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <div class="about-layout">
     <div class="about-left">
       <div class="about-bio-card reveal">
-        <p class="about-text">I'm a Mechatronics Engineer pursuing my MS in Robotics at Worcester Polytechnic Institute (WPI), building on a strong B.Tech in Mechanical Engineering from SPCE, India.</p>
+        <p class="about-text">I'm a Mechatronics Engineer pursuing my MS in Robotics at Worcester Polytechnic Institute (WPI), building on a strong B.Tech in Mechanical Engineering from SPCE (Mumbai), India.</p>
         <p class="about-text">Currently interning as an Automation Support Engineer at EssilorLuxottica–GENTEX, where I deploy vision-based inspection systems, troubleshoot and program industrial robotic arms, and resolve mechanical and software faults to minimize production downtime.</p>
         <p class="about-text">My work spans the full robotics stack, from SolidWorks CAD and ANSYS FEA through to Manufacturing, Robot Programming, and real-world deployment. I'm driven by problems where physical engineering and intelligent systems have to work together.</p>
       </div>
@@ -517,7 +524,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
           </div>
           <div class="about-meta-item">
             <span class="about-meta-label">Undergrad</span>
-            <span class="about-meta-value">B.Tech Mechanical Engineering · SPCE, India</span>
+            <span class="about-meta-value">B.Tech Mechanical Engineering · SPCE (Mumbai), India</span>
           </div>
           <div class="about-meta-item">
             <span class="about-meta-label">Location</span>
@@ -802,7 +809,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
           <span class="jcard-date">Aug 2018 – Jun 2022</span>
         </div>
         <div class="jcard-title">B.Tech Mechanical Engineering</div>
-        <div class="jcard-org">Sardar Patel College of Engineering, India · CGPA 9.04 / 10</div>
+        <div class="jcard-org">Sardar Patel College of Engineering (Mumbai), India · CGPA 9.04 / 10</div>
       </div>
       <div class="jcard-body">
         <div class="jcard-tags">
@@ -1231,7 +1238,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <div class="modal-content">
     <button class="close" onclick="closeModal('cookingArmModal')">&times;</button>
     <h2>Autonomous Cooking System: Undergrad Thesis</h2>
-    <p class="modal-subtitle">SPCE · Undergrad Thesis · Aug 2021–May 2022</p>
+    <p class="modal-subtitle">SPCE (Mumbai) · Undergrad Thesis · Aug 2021–May 2022</p>
     <figure class="modal-figure">
       <img src="Images/Cooking system Complete model.JPG" class="modal-img" alt="Autonomous Cooking System: Full CAD Assembly">
       <figcaption class="modal-caption">Full System CAD Assembly: Robot Arm, Dispensers &amp; Cooktop</figcaption>
@@ -1259,7 +1266,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <div class="modal-content">
     <button class="close" onclick="closeModal('crimpingModal')">&times;</button>
     <h2>Pulley-Driven Crimping Tool Attachment</h2>
-    <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
+    <p class="modal-subtitle">Machine Design Course Project · SPCE (Mumbai)</p>
     <figure class="modal-figure">
       <img src="Images/Crimping tool Rendered Image.JPG" class="modal-img" alt="Crimping Tool: SolidWorks Render">
       <figcaption class="modal-caption">Rendered Assembly: SolidWorks</figcaption>
@@ -1287,7 +1294,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <div class="modal-content">
     <button class="close" onclick="closeModal('gearboxModal')">&times;</button>
     <h2>Two-Stage Reverted Helical Gearbox</h2>
-    <p class="modal-subtitle">Machine Design Course Project · SPCE</p>
+    <p class="modal-subtitle">Machine Design Course Project · SPCE (Mumbai)</p>
     <figure class="modal-figure">
       <img src="Images/Two stage reverted Gearbox.JPG" class="modal-img" alt="Two-Stage Helical Gearbox: SolidWorks Render">
       <figcaption class="modal-caption">Two-Stage Reverted Helical Gearbox: SolidWorks Render</figcaption>
@@ -1315,7 +1322,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   <div class="modal-content">
     <button class="close" onclick="closeModal('roboconModal')">&times;</button>
     <h2>SPCE ROBOCON: Technical Member &amp; Team Captain</h2>
-    <p class="modal-subtitle">SPCE · Technical Member Sep 2018–Aug 2020 · Team Captain Aug 2020–Aug 2021</p>
+    <p class="modal-subtitle">SPCE (Mumbai) · Technical Member Sep 2018–Aug 2020 · Team Captain Aug 2020–Aug 2021</p>
     <figure class="modal-figure">
       <img src="Images/robocon_tr.png" class="modal-img" alt="2021 Throwing Robot: CATIA V5 Render">
       <figcaption class="modal-caption">2021 Throwing Robot (TR): CATIA V5 Render</figcaption>
