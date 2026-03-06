@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self' data:; connect-src 'none';">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manav Mepani | Mechatronics Engineer</title>
+<style id="font-stack">
+/*
+  FIREWALL-SAFE FONTS
+  These font stacks use fonts pre-installed on Windows/macOS/Linux corporate machines.
+  For pixel-perfect rendering, place Inter.woff2, Syne.woff2, PlayfairDisplay.woff2
+  in a /fonts/ folder next to this HTML and uncomment the @font-face blocks below.
+
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600;
+    src: url('fonts/Inter-Variable.woff2') format('woff2'); }
+  @font-face { font-family: 'Syne'; font-style: normal; font-weight: 600 800;
+    src: url('fonts/Syne-Variable.woff2') format('woff2'); }
+  @font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 700;
+    src: url('fonts/PlayfairDisplay-Bold.woff2') format('woff2'); }
+  @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 700;
+    src: url('fonts/PlayfairDisplay-BoldItalic.woff2') format('woff2'); }
+*/
+
+/* System font stack — Inter is pre-installed on Windows 11, macOS 10.15+, most Linux */
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-display: 'Syne', 'Trebuchet MS', 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  --font-serif: 'Playfair Display', 'Georgia', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+</style>
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg: #141922;
+  --surface: #1a2030;
+  --surface2: #202838;
+  --surface3: #252e42;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --text: #d4d8e8;
+  --text-soft: #8892a4;
+  --text-dim: #525c70;
+  --accent: #5eead4;
+  --accent-soft: rgba(94,234,212,0.11);
+  --accent-mid: rgba(94,234,212,0.22);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); overflow-x: hidden; line-height: 1.6; }
+
+/* dot bg */
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.032) 1px, transparent 1px);
+  background-size: 30px 30px; pointer-events: none; z-index: 0;
+}
+
+/* subtle blue ambient glow */
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background: radial-gradient(ellipse 140% 70% at 50% 0%, rgba(56,90,160,0.25) 0%, transparent 72%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── CURSOR ── */
+@media (pointer: fine) {
+  body { cursor: none; }
+  .cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s ease; }
+  .cursor-ring { width: 30px; height: 30px; border: 1px solid rgba(94,234,212,0.35); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.13s ease, opacity 0.3s; }
+  a, button, .project-tile, .journey-card { cursor: none; }
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 56px;
+  background: rgba(20,25,34,0.94); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: var(--font-display); font-weight: 800; font-size: 1rem; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 26px; align-items: center; }
+.nav-links a { font-size: 0.71rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); text-decoration: none; transition: color 0.2s; font-weight: 500; }
+.nav-links a:hover { color: var(--text); }
+.nav-resume { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--accent-soft); border: 1px solid rgba(94,234,212,0.3); color: var(--accent) !important; font-size: 0.71rem; font-weight: 500; letter-spacing: 0.06em; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-resume:hover { background: var(--accent) !important; color: var(--bg) !important; }
+
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; cursor: pointer; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-soft); border-radius: 2px; transition: all 0.25s; }
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--accent); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--accent); }
+
+/* ── HERO ── */
+header {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column;
+  padding: 0 56px;
+  overflow: hidden; z-index: 1;
+}
+
+/* top bar: availability + contacts */
+.hero-topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 96px; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-available {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-soft); font-weight: 500;
+}
+.hero-available-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px rgba(34,197,94,0.6); animation: blink 2s ease-in-out infinite; }
+.hero-contact-links { display: flex; gap: 16px; }
+.hero-contact-links a { font-size: 0.7rem; color: var(--text-soft); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+.hero-contact-links a:hover { color: var(--accent); }
+
+/* name block */
+.hero-name-block {
+  flex: 1; display: flex; flex-direction: row;
+  align-items: center; justify-content: center;
+  gap: 180px; padding-bottom: 32px;
+}
+.hero-name-text { display: flex; flex-direction: column; }
+
+/* hero photo */
+.hero-photo-wrap {
+  flex-shrink: 0; width: 210px; height: 210px;
+  border-radius: 50%;
+  border: 2px solid rgba(94,234,212,0.3);
+  background: var(--surface2);
+  overflow: hidden;
+  opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  box-shadow: 0 0 50px rgba(94,234,212,0.06);
+}
+.hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  color: var(--text-dim);
+}
+.hero-photo-placeholder svg { opacity: 0.22; }
+.hero-photo-placeholder span { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+.hero-role { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 16px; margin-bottom: 0; font-weight: 500; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; display: flex; align-items: center; gap: 10px; }
+.hero-role::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--accent); }
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3.6rem, 8vw, 7.5rem);
+  line-height: 1.0; letter-spacing: -0.02em;
+  font-weight: 700; color: var(--text);
+  opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+}
+h1 .name-first { display: block; }
+h1 .name-last { display: block; color: var(--accent); font-style: italic; }
+
+.hero-tagline { font-family: var(--font-serif); font-size: clamp(0.95rem, 1.4vw, 1.2rem); font-style: italic; font-weight: 400; letter-spacing: 0.01em; color: var(--text-soft); max-width: 620px; white-space: nowrap; line-height: 1.75; margin-top: 20px; opacity: 0; animation: fadeUp 0.7s 0.45s forwards; }
+
+/* stats row */
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 52px;
+  border-top: 1px solid var(--border);
+  opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+}
+.hero-stat { padding: 28px 32px 24px 32px; border-right: 1px solid var(--border); }
+.hero-stat:first-child { padding-left: 0; }
+.hero-stat:last-child { border-right: none; }
+.stat-num { font-family: var(--font-display); font-size: 2.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
+.stat-num span { color: var(--accent); font-size: 1.6rem; }
+.stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; font-weight: 500; }
+
+/* scrolling skills ticker — removed */
+
+/* about skills by category */
+.about-skills-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+.about-skills-block-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
+.skill-category { margin-bottom: 18px; }
+.skill-category:last-child { margin-bottom: 0; }
+.skill-category-title { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-tag { font-size: 0.72rem; font-weight: 400; color: var(--text-soft); background: var(--surface2); border: 1px solid var(--border2); padding: 5px 12px; border-radius: 20px; }
+
+/* certs subsection */
+.certs-subsection { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+.certs-subsection-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+.certs-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* orb */
+.hero-orb { position: absolute; right: -60px; top: 40%; transform: translateY(-50%); width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.055) 0%, rgba(99,102,241,0.035) 50%, transparent 70%); pointer-events: none; animation: orbpulse 10s ease-in-out infinite; }
+
+/* ── SECTION SHARED ── */
+section { position: relative; z-index: 1; padding: 72px 56px; }
+section + section { border-top: 1px solid var(--border); }
+.section-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 2rem; letter-spacing: -0.025em; color: var(--text); line-height: 1.2; }
+h2 em { font-style: italic; color: var(--accent); font-family: var(--font-serif); font-weight: 700; }
+/* Playfair tagline headings */
+h2.playfair-heading { font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.6rem, 2.8vw, 2.4rem); line-height: 1.25; letter-spacing: -0.01em; }
+h2.playfair-heading em { font-style: italic; color: var(--accent); font-family: var(--font-serif); }
+.section-header { margin-bottom: 40px; }
+.section-line { width: 48px; height: 2px; background: var(--accent); margin-top: 14px; border-radius: 2px; }
+
+/* ── ABOUT ── */
+.about-layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+
+.about-left { display: flex; flex-direction: column; gap: 16px; }
+
+.about-bio-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 36px; }
+.about-text { font-size: 0.88rem; line-height: 1.88; color: var(--text-soft); margin-bottom: 14px; font-weight: 300; }
+.about-text:last-of-type { margin-bottom: 0; }
+
+.about-interests { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
+.interests-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+.interests-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.interest-pill { font-size: 0.78rem; color: var(--text-soft); background: var(--surface2); border: 1px solid var(--border2); padding: 7px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px; font-weight: 400; }
+
+.about-right { display: flex; flex-direction: column; gap: 16px; }
+
+.about-meta-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+.about-meta-list { display: flex; flex-direction: column; gap: 14px; }
+.about-meta-item { display: flex; flex-direction: column; gap: 3px; }
+.about-meta-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.about-meta-value { font-size: 0.82rem; color: var(--text-soft); font-weight: 300; }
+
+.skills-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+.skills-card-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
+.skills-list { display: flex; flex-direction: column; gap: 10px; }
+.skill-row { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--text-soft); font-weight: 300; }
+.skill-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 5px rgba(94,234,212,0.55); }
+
+/* ── JOURNEY ── */
+.journey-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+.j-filter { font-size: 0.68rem; letter-spacing: 0.06em; font-weight: 500; padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text-soft); background: transparent; cursor: pointer; transition: all 0.2s; }
+.j-filter:hover { border-color: var(--accent); color: var(--accent); }
+.j-filter.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.journey-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+.journey-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 0; overflow: hidden; transition: border-color 0.25s, transform 0.2s;
+  cursor: pointer;
+}
+.journey-card:hover { border-color: rgba(94,234,212,0.3); transform: translateY(-2px); }
+.journey-card.hidden { display: none; }
+
+.jcard-header { padding: 22px 24px 16px; border-bottom: 1px solid var(--border); }
+.jcard-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.jcard-type { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+.jcard-type.education { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.25); }
+.jcard-type.industry { background: rgba(94,234,212,0.12); color: var(--accent); border: 1px solid rgba(94,234,212,0.25); }
+.jcard-type.research { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+.jcard-date { font-size: 0.68rem; color: var(--text-dim); font-weight: 400; }
+.jcard-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+.jcard-org { font-size: 0.78rem; color: var(--text-soft); font-weight: 300; }
+
+.jcard-body { padding: 16px 24px 20px; }
+.jcard-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.jcard-tag { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 12px; }
+
+.jcard-expand { display: none; padding: 0 24px 24px; }
+.jcard-expand.open { display: block; }
+.jcard-expand-section { margin-bottom: 16px; }
+.jcard-expand-title { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+.jcard-expand-text { font-size: 0.78rem; color: var(--text-soft); line-height: 1.8; font-weight: 300; }
+.jcard-expand-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.jcard-expand-list li { font-size: 0.78rem; color: var(--text-soft); line-height: 1.75; font-weight: 300; display: flex; gap: 10px; }
+.jcard-expand-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 0.72rem; margin-top: 2px; }
+.jcard-expand-skill-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.jcard-expand-skill { font-size: 0.62rem; font-weight: 500; padding: 3px 9px; border-radius: 12px; background: var(--surface2); border: 1px solid var(--border2); color: var(--text-soft); }
+.jcard-toggle { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-top: 1px solid var(--border); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text-dim); font-weight: 500; transition: color 0.2s; }
+.jcard-toggle:hover { color: var(--accent); }
+.jcard-toggle-arrow { transition: transform 0.25s; font-size: 0.7rem; }
+.jcard-toggle.expanded .jcard-toggle-arrow { transform: rotate(180deg); }
+
+/* ── SKILLS FILTER ── */
+.skills-filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.s-filter { font-size: 0.68rem; letter-spacing: 0.06em; font-weight: 500; padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text-soft); background: transparent; cursor: pointer; transition: all 0.2s; }
+.s-filter:hover { border-color: var(--accent); color: var(--accent); }
+.s-filter.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.skills-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-pill { font-size: 0.75rem; font-weight: 400; padding: 7px 15px; border-radius: 22px; border: 1px solid var(--border2); color: var(--text-soft); background: var(--surface); transition: all 0.2s; }
+.skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.skill-pill.hidden { display: none; }
+
+/* certs row */
+.certs-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+.cert-badge { display: flex; align-items: center; gap: 8px; padding: 9px 16px; background: var(--surface); border: 1px solid var(--border2); border-radius: 8px; font-size: 0.74rem; color: var(--text-soft); font-weight: 400; }
+.cert-badge-icon { font-size: 0.9rem; }
+
+/* ── PROJECT CATEGORIES ── */
+.project-category { margin-bottom: 48px; }
+.category-heading { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; padding: 10px 18px; background: var(--accent-soft); border: 1px solid rgba(94,234,212,0.2); border-radius: 6px; }
+.category-heading-icon { color: var(--accent); font-size: 0.7rem; }
+.category-heading-text { font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+
+/* ── PROJECT STORY TILES ── */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.project-tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 0; transition: border-color 0.25s, background 0.25s, transform 0.2s;
+  position: relative; overflow: hidden; display: flex; flex-direction: column;
+}
+.project-tile:hover { border-color: rgba(94,234,212,0.3); background: var(--surface2); transform: translateY(-3px); }
+.tile-header { padding: 24px 24px 16px; border-bottom: 1px solid var(--border); }
+.tile-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.company-logo { width: 32px; height: 32px; object-fit: contain; opacity: 0.6; border-radius: 6px; }
+.tile-arrow { font-size: 1rem; color: var(--text-dim); transition: color 0.25s, transform 0.25s; }
+.project-tile:hover .tile-arrow { color: var(--accent); transform: translate(2px,-2px); }
+.project-tile h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0; color: var(--text); line-height: 1.35; }
+.tile-story { padding: 0; flex: 1; display: flex; flex-direction: column; }
+.tile-story-block { padding: 14px 24px; border-bottom: 1px solid var(--border); }
+.tile-story-block:last-of-type { border-bottom: none; }
+.tile-story-label {
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;
+}
+.tile-story-label.why { color: #f59e0b; }
+.tile-story-label.what { color: var(--accent); }
+.tile-story-label.result { color: #a78bfa; }
+.tile-story-label::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.tile-story-text { font-size: 0.78rem; line-height: 1.65; color: var(--text-soft); font-weight: 300; }
+.tile-footer { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
+.tile-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tile-tag { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 20px; }
+.tile-details-btn { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--text-dim); white-space: nowrap; flex-shrink: 0; transition: color 0.2s; font-weight: 500; }
+.project-tile:hover .tile-details-btn { color: var(--accent); }
+@media (max-width: 768px) {
+  .project-grid { grid-template-columns: 1fr; }
+  .tile-header { padding: 20px 18px 14px; }
+  .tile-story-block { padding: 12px 18px; }
+  .tile-footer { padding: 12px 18px; }
+}
+
+
+/* ── MODAL (KEEP EXACTLY) ── */
+.modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(5,7,12,0.88); backdrop-filter: blur(10px); padding: 40px 20px; overflow-y: auto; }
+.modal.open { display: flex; align-items: flex-start; justify-content: center; animation: fadeIn 0.2s ease; }
+.modal-content { background: var(--surface); border: 1px solid var(--border2); width: 100%; max-width: 720px; padding: 44px; border-radius: 14px; position: relative; margin: auto; }
+.modal-content h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; color: var(--text); letter-spacing: -0.02em; padding-right: 32px; }
+.modal-subtitle { font-size: 0.72rem; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 24px; font-weight: 500; }
+.close { position: absolute; top: 18px; right: 20px; font-size: 1.5rem; color: var(--text-dim); background: none; border: none; line-height: 1; padding: 4px 8px; transition: color 0.2s; cursor: pointer; }
+.close:hover { color: var(--text); }
+.modal-figure { margin: 18px 0; }
+.modal-img { width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block; }
+.modal-caption { font-size: 0.7rem; color: var(--text-dim); font-style: italic; text-align: center; padding: 6px 0 2px; letter-spacing: 0.02em; }
+.modal-text { font-size: 0.82rem; line-height: 1.85; color: var(--text-soft); margin-bottom: 14px; font-weight: 300; }
+.modal-video { width: 100%; border-radius: 8px; margin: 14px 0; border: 1px solid var(--border); display: block; }
+.modal-highlights { margin: 16px 0; padding: 18px 22px; background: var(--surface2); border-left: 2px solid var(--accent); border-radius: 0 8px 8px 0; }
+.modal-highlights li { font-size: 0.8rem; line-height: 1.85; color: var(--text-soft); margin-left: 14px; margin-bottom: 4px; font-weight: 300; }
+.modal-actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.video-placeholder { width: 100%; border-radius: 8px; margin: 16px 0; border: 1px dashed rgba(94,234,212,0.2); background: var(--surface2); padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.video-placeholder-icon { font-size: 1.8rem; color: var(--text-dim); }
+.video-placeholder-text { font-size: 0.74rem; color: var(--text-dim); text-align: center; line-height: 1.7; font-weight: 300; }
+.video-placeholder-text strong { color: var(--text-soft); font-weight: 500; display: block; margin-bottom: 2px; }
+.video-placeholder-text code { color: var(--accent); opacity: 0.75; font-size: 0.7rem; }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 22px; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em; text-decoration: none; border-radius: 6px; transition: all 0.2s; border: none; }
+.btn-primary { background: var(--accent); color: var(--bg); cursor: pointer; }
+.btn-primary:hover { background: #fff; transform: translateY(-1px); }
+.btn-ghost { border: 1px solid var(--border2); color: var(--text-soft); background: transparent; cursor: pointer; }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+/* ── PUBLICATIONS ── */
+.publications-list { display: flex; flex-direction: column; gap: 10px; }
+.publication { border: 1px solid var(--border); border-left: 2px solid var(--accent); padding: 22px 28px; background: var(--surface); border-radius: 0 10px 10px 0; display: flex; justify-content: space-between; align-items: center; gap: 24px; transition: background 0.2s; }
+.publication:hover { background: var(--surface2); }
+.pub-journal { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; font-weight: 500; }
+.publication h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; margin-bottom: 5px; line-height: 1.4; color: var(--text); }
+.pub-meta { font-size: 0.72rem; color: var(--text-dim); }
+.publication a { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; white-space: nowrap; border: 1px solid rgba(94,234,212,0.25); padding: 9px 16px; border-radius: 6px; transition: all 0.2s; flex-shrink: 0; font-weight: 500; }
+.publication a:hover { background: var(--accent); color: var(--bg); }
+
+/* ── CONTACT ── */
+.contact-intro { font-size: 0.9rem; color: var(--text-soft); max-width: 540px; line-height: 1.8; margin-bottom: 36px; font-weight: 300; }
+.contact-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 28px; }
+.contact-link { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--border); background: var(--surface); border-radius: 12px; text-decoration: none; transition: all 0.25s; }
+.contact-link:hover { background: var(--surface2); border-color: rgba(94,234,212,0.2); transform: translateY(-2px); }
+.contact-link:hover .contact-link-arrow { transform: translate(3px,-3px); color: var(--accent); }
+.contact-platform { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.contact-handle { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; color: var(--text); word-break: break-all; }
+.contact-link-arrow { font-size: 1rem; color: var(--text-dim); transition: all 0.25s; margin-top: auto; }
+
+/* ── FOOTER ── */
+footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 22px 56px; display: flex; justify-content: space-between; align-items: center; font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.04em; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes slideDown { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes orbpulse { 0%,100% { transform:translateY(-50%) scale(1); opacity:0.6; } 50% { transform:translateY(-50%) scale(1.05); opacity:1; } }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+.reveal { opacity:0; transform:translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .contact-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .about-layout { grid-template-columns: 1fr; }
+  .about-right { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  header, section { padding-left: 24px; padding-right: 24px; }
+  footer { padding-left: 24px; padding-right: 24px; }
+  .hero-stats { grid-template-columns: repeat(3, 1fr); }
+  .hero-stat { padding: 20px 12px 16px; }
+  .hero-stat:first-child { padding-left: 0; }
+  .hero-name-block { gap: 60px; }
+  .hero-photo-wrap { width: 160px; height: 160px; }
+}
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  nav { padding: 14px 20px; }
+  .nav-links {
+    display: none; position: fixed; top: 53px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0; z-index: 250;
+    background: rgba(20,25,34,0.97); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border2); padding-bottom: 12px;
+  }
+  .nav-links.is-open { display: flex; animation: slideDown 0.2s ease; }
+  .nav-links a { font-size: 0.82rem; padding: 15px 24px; border-bottom: 1px solid var(--border); width: 100%; }
+  .nav-links a:last-of-type { border-bottom: none; }
+  .nav-resume { margin: 10px 20px 0 !important; padding: 12px 20px !important; font-size: 0.78rem !important; border-radius: 6px; justify-content: center; display: flex !important; border-bottom: none !important; }
+  header { padding: 0 20px; }
+  .hero-topbar { padding-top: 80px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .hero-name-block { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+  .hero-photo-wrap { width: 96px; height: 96px; }
+  .hero-tagline { white-space: normal; max-width: 100%; }
+  h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .hero-stat:first-child { padding-left: 0; }
+  section { padding: 52px 20px; }
+  footer { padding: 20px; flex-direction: column; gap: 6px; text-align: center; }
+  .about-right { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
+  .project-tile { padding: 22px 18px; }
+  .modal { padding: 0; align-items: flex-end; }
+  .modal-content { max-width: 100%; border-radius: 20px 20px 0 0; padding: 28px 20px calc(28px + env(safe-area-inset-bottom)); max-height: 90svh; overflow-y: auto; margin: 0; }
+  .publication { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .hero-orb { display: none; }
+}
+@media (max-width: 480px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .about-right { grid-template-columns: 1fr; }
+}
+
+/* ── MOBILE RESUME BUTTON (outside dropdown) ── */
+.nav-resume-mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .nav-resume-mobile {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 13px;
+    background: var(--accent-soft); border: 1px solid rgba(94,234,212,0.3);
+    color: var(--accent); font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.06em; text-decoration: none; border-radius: 6px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-resume-mobile:hover { background: var(--accent); color: var(--bg); }
+  /* hide the resume link inside the dropdown on mobile */
+  .nav-links .nav-resume { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="logo" href="#">MM<span>.</span></a>
+  <a href="Resume (Manav M.).pdf" class="nav-resume-mobile" download>Resume ↓</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#about"       onclick="closeNav()">About</a>
+    <a href="#journey"     onclick="closeNav()">Journey</a>
+    <a href="#skills"      onclick="closeNav()">Skills</a>
+    <a href="#projects"    onclick="closeNav()">Projects</a>
+    <a href="#publications" onclick="closeNav()">Publications</a>
+    <a href="#contact"     onclick="closeNav()">Contact</a>
+    <a href="Resume (Manav M.).pdf" class="nav-resume" download onclick="closeNav()">Resume ↓</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="hero-orb"></div>
+
+  <div class="hero-topbar">
+    <div class="hero-available">
+      <span class="hero-available-dot"></span>
+      Available for Opportunities
+    </div>
+    <div class="hero-contact-links">
+      <a href="mailto:mepanimanav@gmail.com">mepanimanav@gmail.com</a>
+      <a href="tel:+17742289813">+1 (774) 228-9813</a>
+    </div>
+  </div>
+
+  <div class="hero-name-block">
+    <div class="hero-name-text">
+      <h1>
+        <span class="name-first">Manav</span>
+        <span class="name-last">Mepani</span>
+      </h1>
+      <p class="hero-role">Mechatronics Engineer</p>
+      <p class="hero-tagline">
+        Automation Support Intern · EssilorLuxottica<br>
+        MS in Robotics Engineering · Worcester Polytechnic Institute (WPI)
+      </p>
+    </div>
+    <!-- Replace src with your photo path e.g. Images/photo.jpg -->
+    <div class="hero-photo-wrap">
+      <img src="Images/Professional Headshot.png" alt="Manav Mepani"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="hero-photo-placeholder" style="display:none">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9">
+          <circle cx="12" cy="8" r="4.5"/>
+          <path d="M3 20c0-4.5 4-8 9-8s9 3.5 9 8"/>
+        </svg>
+        <span>Your Photo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">Years Research &amp; Industry</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Peer-Reviewed Publications</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">10<span>+</span></div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+  </div>
+
+</header>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-label">About</div>
+    <h2 class="playfair-heading">Where <em>precision</em> meets intelligent design.</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-left">
+      <div class="about-bio-card reveal">
+        <p class="about-text">I'm a Mechatronics Engineer pursuing my MS in Robotics at Worcester Polytechnic Institute (WPI), building on a strong B.Tech in Mechanical Engineering from SPCE (Mumbai), India.</p>
+        <p class="about-text">Currently interning as an Automation Support Engineer at EssilorLuxottica–GENTEX, where I deploy vision-based inspection systems, troubleshoot and program industrial robotic arms, and resolve mechanical and software faults to minimize production downtime.</p>
+        <p class="about-text">My work spans the full robotics stack, from SolidWorks CAD and ANSYS FEA through to Manufacturing, Robot Programming, and real-world deployment. I'm driven by problems where physical engineering and intelligent systems have to work together.</p>
+      </div>
+      <div class="about-interests reveal" style="transition-delay:0.1s">
+        <div class="interests-label">Focus Areas</div>
+        <div class="interests-row">
+          <span class="interest-pill">⚙️ Mechanical Design</span>
+          <span class="interest-pill">📐 CAD / FEA / GD&amp;T</span>
+          <span class="interest-pill">🏭 Industrial Automation</span>
+          <span class="interest-pill">🤖 Robot Programming</span>
+          <span class="interest-pill">👁 Vision Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="about-meta-card reveal" style="transition-delay:0.15s">
+        <div class="about-meta-list">
+          <div class="about-meta-item">
+            <span class="about-meta-label">Current Role</span>
+            <span class="about-meta-value">Automation Support Intern · EssilorLuxottica–GENTEX, MA</span>
+          </div>
+          <div class="about-meta-item">
+            <span class="about-meta-label">Education</span>
+            <span class="about-meta-value">MS Robotics Engineering · WPI · Aug 2024 – May 2026</span>
+          </div>
+          <div class="about-meta-item">
+            <span class="about-meta-label">Undergrad</span>
+            <span class="about-meta-value">B.Tech Mechanical Engineering · SPCE (Mumbai), India</span>
+          </div>
+          <div class="about-meta-item">
+            <span class="about-meta-label">Location</span>
+            <span class="about-meta-value">Worcester, MA &nbsp;·&nbsp; <span style="color:var(--accent);font-size:0.75rem;font-weight:500">Open to Relocate</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-card reveal" style="transition-delay:0.22s">
+        <div class="skills-card-label">Core Tools</div>
+        <div class="skills-list">
+          <div class="skill-row"><span class="skill-dot"></span>SolidWorks / CATIA V5</div>
+          <div class="skill-row"><span class="skill-dot"></span>ANSYS Workbench / ADAMS</div>
+          <div class="skill-row"><span class="skill-dot"></span>CNC / 3D Printing / GD&amp;T</div>
+          <div class="skill-row"><span class="skill-dot"></span>Epson RC+ / Studio 5000</div>
+          <div class="skill-row"><span class="skill-dot"></span>Python / MATLAB / ROS2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── JOURNEY ── -->
+<section id="journey">
+  <div class="section-header reveal">
+    <div class="section-label">Journey</div>
+    <h2>Experience &amp; Education</h2>
+    <div class="section-line"></div>
+    <p style="font-size:0.8rem;color:var(--text-dim);margin-top:10px;font-weight:300">Click any card to expand full details.</p>
+  </div>
+
+  <div class="journey-filters reveal">
+    <button class="j-filter active" data-filter="all">All</button>
+    <button class="j-filter" data-filter="education">Education</button>
+    <button class="j-filter" data-filter="industry">Industry</button>
+    <button class="j-filter" data-filter="research">Research</button>
+  </div>
+
+  <div class="journey-grid">
+
+    <!-- WPI -->
+    <div class="journey-card" data-type="education">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type education">Education</span>
+          <span class="jcard-date">Aug 2024 – May 2026</span>
+        </div>
+        <div class="jcard-title">MS in Robotics Engineering</div>
+        <div class="jcard-org">Worcester Polytechnic Institute, USA · GPA 4.0</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">Robot Dynamics</span><span class="jcard-tag">Deep Learning / RL</span><span class="jcard-tag">ROS2</span><span class="jcard-tag">Motion Planning</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-wpi">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Rigorous graduate program focused on robotic manipulation, motion planning, control systems, and computer vision.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Coursework & Projects</div>
+          <ul class="jcard-expand-list">
+            <li>Benchmarked 4 IK solvers (NR, I-DLS, SVD-DLS, PSO) for 6-DOF VR teleoperation pipeline</li>
+            <li>Implemented Chance-Constrained RRT motion planner with Gaussian uncertainty handling</li>
+            <li>Built PD controller for DYNAMIXEL actuator running at 100 Hz in current control mode</li>
+            <li>Courses: Robot Dynamics, Motion Planning, Controls, Computer Vision, Deep Learning</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">ROS2</span><span class="jcard-expand-skill">Python</span><span class="jcard-expand-skill">MATLAB</span><span class="jcard-expand-skill">Docker</span><span class="jcard-expand-skill">Motion Planning</span><span class="jcard-expand-skill">Control Systems</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-wpi')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- EssilorLuxottica -->
+    <div class="journey-card" data-type="industry">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type industry">Industry</span>
+          <span class="jcard-date">May 2025 – Present</span>
+        </div>
+        <div class="jcard-title">Automation Support Intern</div>
+        <div class="jcard-org">EssilorLuxottica – GENTEX, MA, USA</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">Computer Vision</span><span class="jcard-tag">Robot Programming</span><span class="jcard-tag">CAD Design</span><span class="jcard-tag">Manufacturing</span><span class="jcard-tag">PLC Programming</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-el">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Deployed vision inspection system using Keyence Vision system and achieved 99% accuracy in inspection and maintained multi-robot manufacturing equipment on a high-throughput optical lens production line.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Responsibilities</div>
+          <ul class="jcard-expand-list">
+            <li>Deployed automated vision-based label inspection to ensure traceability and reduce mispack risk</li>
+            <li>Troubleshot and programmed 6-axis, SCARA, and gantry robotic systems</li>
+            <li>Performed root cause analysis on recurring mechanical and software faults</li>
+            <li>Wrote technical documentation covering fault logs, repair procedures, and system configurations</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">Computer Vision</span><span class="jcard-expand-skill">Epson RC+</span><span class="jcard-expand-skill">RT ToolBox3</span><span class="jcard-expand-skill">Studio 5000</span><span class="jcard-expand-skill">Root Cause Analysis</span><span class="jcard-expand-skill">Documentation</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-el')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- Innovation Story -->
+    <div class="journey-card" data-type="industry">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type industry">Industry</span>
+          <span class="jcard-date">Aug 2023 – Apr 2024</span>
+        </div>
+        <div class="jcard-title">Mechanical Design Engineer (Robotics)</div>
+        <div class="jcard-org">The Innovation Story, India</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">SolidWorks</span><span class="jcard-tag">CNC / Manufacturing</span><span class="jcard-tag">Mechatronics</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-tis">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Designed and manufactured two national competition robots, Blue Bot Builder and Grasshopper, achieving ~90% reliability in 3 months. Mentored 20 students in CAD, physics, and manufacturing.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Achievements</div>
+          <ul class="jcard-expand-list">
+            <li>Designed precise actuators and rigid modular chassis optimised for repeatability under competition pressure</li>
+            <li>Fabricated using in-house CNC, lathe, and 3D printing</li>
+            <li>Taught physics, SolidWorks CAD, and manufacturing to 20 students across grade levels and helped the team achieve 4th place nationally</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">SolidWorks</span><span class="jcard-expand-skill">CNC</span><span class="jcard-expand-skill">3D Printing</span><span class="jcard-expand-skill">Java</span><span class="jcard-expand-skill">Mechatronics</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-tis')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- TIH IIT Bombay -->
+    <div class="journey-card" data-type="research">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type research">Research</span>
+          <span class="jcard-date">Jun 2022 – Aug 2023</span>
+        </div>
+        <div class="jcard-title">Project Research Assistant</div>
+        <div class="jcard-org">Technology Innovation Hub (IIT Bombay), India</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">CAD</span><span class="jcard-tag">Manufacturing</span><span class="jcard-tag">ADAMS</span><span class="jcard-tag">Optimization</span><span class="jcard-tag">Octave</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-tih">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Designed an autonomous onion harvester and optimised a bomb disposal rover's rocker-bogie mechanism, resulting in two peer-reviewed publications.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Work</div>
+          <ul class="jcard-expand-list">
+            <li>Developed the CAD model and manufactured an Autonomous Onion Harvester to implement an Energy-Aware Path Planning algorithm; managed selection of motor for locomotion and conveyor, and vendor procurement</li>
+            <li>Used ADAMS dynamic analysis to validate rocker-bogie ground-contact constraints</li>
+            <li>Implemented Simulated Annealing in Octave to optimise rocker-bogie step-climbing parameters</li>
+            <li>2 publications: IEEE AgriFood Electronics (2024) &amp; Journal of Institution of Engineers India (2024)</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">Python</span><span class="jcard-expand-skill">Vendor Management</span><span class="jcard-expand-skill">ADAMS</span><span class="jcard-expand-skill">Octave</span><span class="jcard-expand-skill">CAD</span><span class="jcard-expand-skill">FEA</span><span class="jcard-expand-skill">3D Printing</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-tih')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- Innovation Story Trainee -->
+    <div class="journey-card" data-type="industry">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type industry">Industry</span>
+          <span class="jcard-date">Sep 2021 – Dec 2021</span>
+        </div>
+        <div class="jcard-title">Trainee</div>
+        <div class="jcard-org">The Innovation Story, India</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">CAD</span><span class="jcard-tag">CNC Machining</span><span class="jcard-tag">Curriculum Design</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-tis2">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Designed and prototyped a competition robot while developing a robotics curriculum to teach core concepts to students.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Work</div>
+          <ul class="jcard-expand-list">
+            <li>Designed and prototyped a competition robot, enhancing skills in CAD and CNC machining</li>
+            <li>Developed a robotics curriculum covering core concepts for student training</li>
+          </ul>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-tis2')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- Prolific 3D Tech -->
+    <div class="journey-card" data-type="industry">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type industry">Industry</span>
+          <span class="jcard-date">Jun 2021 – Jul 2021</span>
+        </div>
+        <div class="jcard-title">Intern Design Engineer</div>
+        <div class="jcard-org">Prolific 3D Tech, India</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">SolidWorks</span><span class="jcard-tag">GD&amp;T</span><span class="jcard-tag">Reverse Engineering</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-p3d">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Led reverse engineering of a Can Filling and Seaming Machine with 50+ component, producing fully constrained 3D assemblies and GD&T manufacturing drawings.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Key Work</div>
+          <ul class="jcard-expand-list">
+            <li>Measured all 50+ components to capture accurate geometry and fit conditions</li>
+            <li>Built fully constrained 3D SolidWorks assemblies with correct tolerances</li>
+            <li>Created 2D drawings with comprehensive GD&amp;T including tolerance stack-ups and datum structures</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">SolidWorks</span><span class="jcard-expand-skill">GD&amp;T</span><span class="jcard-expand-skill">Tolerance Analysis</span><span class="jcard-expand-skill">Reverse Engineering</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-p3d')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+    <!-- SPCE -->
+    <div class="journey-card" data-type="education">
+      <div class="jcard-header">
+        <div class="jcard-meta">
+          <span class="jcard-type education">Education</span>
+          <span class="jcard-date">Aug 2018 – Jun 2022</span>
+        </div>
+        <div class="jcard-title">B.Tech Mechanical Engineering</div>
+        <div class="jcard-org">Sardar Patel College of Engineering (Mumbai), India · CGPA 9.04 / 10</div>
+      </div>
+      <div class="jcard-body">
+        <div class="jcard-tags">
+          <span class="jcard-tag">Mechanical Eng.</span><span class="jcard-tag">CAD / FEA</span><span class="jcard-tag">ROBOCON</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="exp-spce">
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Overview</div>
+          <div class="jcard-expand-text">Four-year engineering degree with strong fundamentals in mechanical design, manufacturing, and dynamics. Active in ROBOCON international robotics competitions throughout, progressing to Team Captain.</div>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Highlights</div>
+          <ul class="jcard-expand-list">
+            <li>Undergrad thesis on 6-DOF autonomous cooking robotic arm (published)</li>
+            <li>SPCE ROBOCON - Team Captain: AIR 19 (2021); Team Member: AIR 9 (2019, 2020)</li>
+            <li>Machine design projects: crimping tool attachment, two-stage reverted helical gearbox</li>
+          </ul>
+        </div>
+        <div class="jcard-expand-section">
+          <div class="jcard-expand-title">Skills</div>
+          <div class="jcard-expand-skill-row">
+            <span class="jcard-expand-skill">CATIA V5</span><span class="jcard-expand-skill">SolidWorks</span><span class="jcard-expand-skill">ANSYS</span><span class="jcard-expand-skill">ADAMS</span><span class="jcard-expand-skill">Arduino</span><span class="jcard-expand-skill">GD&amp;T</span>
+          </div>
+        </div>
+      </div>
+      <div class="jcard-toggle" onclick="toggleCard(this, 'exp-spce')">
+        <span>Click to expand ↗</span><span class="jcard-toggle-arrow">▾</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-label">Skills</div>
+    <h2>Technical Expertise</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-filter-row reveal">
+    <button class="s-filter active" data-cat="all">All</button>
+    <button class="s-filter" data-cat="cad">CAD / Design</button>
+    <button class="s-filter" data-cat="analysis">Analysis / Simulation</button>
+    <button class="s-filter" data-cat="programming">Programming</button>
+    <button class="s-filter" data-cat="robotics">Robotics / Automation</button>
+    <button class="s-filter" data-cat="manufacturing">Manufacturing</button>
+  </div>
+
+  <div class="skills-cloud reveal" style="transition-delay:0.1s">
+    <span class="skill-pill" data-cat="cad">SolidWorks</span>
+    <span class="skill-pill" data-cat="cad">CATIA V5</span>
+    <span class="skill-pill" data-cat="cad">AutoCAD</span>
+    <span class="skill-pill" data-cat="cad">GD&amp;T</span>
+    <span class="skill-pill" data-cat="cad">Tolerance Design</span>
+    <span class="skill-pill" data-cat="cad">Design for Manufacturing</span>
+    <span class="skill-pill" data-cat="analysis">ANSYS Workbench</span>
+    <span class="skill-pill" data-cat="analysis">Structural FEA</span>
+    <span class="skill-pill" data-cat="analysis">Thermal FEA</span>
+    <span class="skill-pill" data-cat="analysis">ADAMS Dynamic Analysis</span>
+    <span class="skill-pill" data-cat="analysis">FluidSIM</span>
+    <span class="skill-pill" data-cat="analysis">Simulated Annealing</span>
+    <span class="skill-pill" data-cat="programming">Python</span>
+    <span class="skill-pill" data-cat="programming">MATLAB / Octave</span>
+    <span class="skill-pill" data-cat="programming">C++</span>
+    <span class="skill-pill" data-cat="programming">Arduino</span>
+    <span class="skill-pill" data-cat="programming">Linux</span>
+    <span class="skill-pill" data-cat="programming">Git / Docker</span>
+    <span class="skill-pill" data-cat="robotics">ROS 2</span>
+    <span class="skill-pill" data-cat="robotics">Epson RC+ (SPEL+)</span>
+    <span class="skill-pill" data-cat="robotics">RT ToolBox3 (Mitsubishi)</span>
+    <span class="skill-pill" data-cat="robotics">Studio 5000 Allen-Bradley</span>
+    <span class="skill-pill" data-cat="robotics">Keyence Vision Systems</span>
+    <span class="skill-pill" data-cat="robotics">Computer Vision</span>
+    <span class="skill-pill" data-cat="robotics">Webots</span>
+    <span class="skill-pill" data-cat="robotics">PD / PID Control</span>
+    <span class="skill-pill" data-cat="robotics">Jacobian / IK</span>
+    <span class="skill-pill" data-cat="manufacturing">CNC Machining</span>
+    <span class="skill-pill" data-cat="manufacturing">3D Printing</span>
+    <span class="skill-pill" data-cat="manufacturing">Lathe / Mill</span>
+    <span class="skill-pill" data-cat="manufacturing">Vendor Management</span>
+    <span class="skill-pill" data-cat="manufacturing">Technical Documentation</span>
+  </div>
+
+  <div class="certs-subsection reveal" style="transition-delay:0.2s">
+    <div class="certs-subsection-label">Certifications</div>
+    <div class="certs-row">
+      <span class="cert-badge"><span class="cert-badge-icon">🏅</span> Neural Networks &amp; Deep Learning — Coursera</span>
+      <span class="cert-badge"><span class="cert-badge-icon">🏅</span> ANSYS Workbench Certified</span>
+      <span class="cert-badge"><span class="cert-badge-icon">🏅</span> Python for Data Structures — Coursera</span>
+      <span class="cert-badge"><span class="cert-badge-icon">🏅</span> Digital Electronic Circuits</span>
+      <span class="cert-badge"><span class="cert-badge-icon">🏅</span> Siemens PLC</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS (PRESERVED EXACTLY) ── -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-label">Projects</div>
+    <h2>Selected Work</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="project-category reveal">
+    <div class="category-heading">
+      <span class="category-heading-icon">▸</span>
+      <span class="category-heading-text">Industry &amp; Internship Work</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-tile" onclick="openModal('visionModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/EL.png" class="company-logo" alt="EssilorLuxottica"><span class="tile-arrow">↗</span></div>
+          <h3>Vision-Based Label Inspection System</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Manual label checks on a high-speed optical lens line were slow and error-prone, risking misalligned lables reaching customers leading to customer complains.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Designed and deployed an automated vision inspection system using a Keyence camera to verify label presence, orientation, and barcode validity, assisted in integrating it with Allen-Bradley PLC for line-stop on failure.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Achieved ~99% inspection accuracy with near-zero false-pass rate, eliminating mispack risk and creating a full traceability trail for every shipment.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Computer Vision</span><span class="tile-tag">Quality Automation</span><span class="tile-tag">Manufacturing</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('robotProgModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/EL.png" class="company-logo" alt="EssilorLuxottica"><span class="tile-arrow">↗</span></div>
+          <h3>Industrial Robot Programming &amp; Maintenance</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">A 13-year-old Mitsubishi robot critical to tray-handling operations was becoming obsolete, increasing downtime risk and limiting maintainability and integration with modern PLC systems.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Analyzed and migrated the legacy code to an Epson platform, restructured the program architecture, eliminated redundancies, redesigned the homing logic, and validated the system through simulation and physical testing.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Delivered a safer, modular, and production-ready robotic system with improved reliability, maintainability, and seamless PLC compatibility.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Robot Programming</span><span class="tile-tag">Root Cause Analysis</span><span class="tile-tag">Maintenance</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('innovationStoryModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/TIS.png" class="company-logo" alt="The Innovation Story"><span class="tile-arrow">↗</span></div>
+          <h3>Competition Robots: The Innovation Story</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">The team needed two fully functional competition robots designed and manufactured from scratch in under three months using mainly in-house manufacturing unit.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Designed and built two competition robots, Grasshopper and Blue Bot Builder, in SOLIDWORKS; fabricated parts using CNC, lathe, and 3D printing while mentoring 20 students in CAD and manufacturing..</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">The initial prototype, Grasshopper, proved competition-ready, while the improved Blue Bot Builder achieved >90% task repeatability and reliability, enabling the team to secure 4th place nationally.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">CNC / Manufacturing</span><span class="tile-tag">Mechatronics</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('harvesterModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/TIH-logo.png" class="company-logo" alt="TIH IIT Bombay"><span class="tile-arrow">↗</span></div>
+          <h3>Autonomous Onion Harvester</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Small Indian farms lack affordable harvesting automation manual onion harvesting is labour-intensive and seasonal labour is increasingly scarce.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Designed the complete mechanical system (chassis, drivetrain, end-effector), selected motors and power components, and coordinated with external vendors for fabrication to support an energy-aware path planning system with automatic return-to-base on low battery.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Delivered a functional prototype capable of autonomous field navigation and harvesting. The work was published in IEEE Transactions on AgriFood Electronics (2024).</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Python</span><span class="tile-tag">Path Planning</span><span class="tile-tag">CAD / Manufacturing</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('roverModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/TIH-logo.png" class="company-logo" alt="TIH IIT Bombay"><span class="tile-arrow">↗</span></div>
+          <h3>Bomb Disposal Rover &amp; Rocker-Bogie Optimization</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">The bomb disposal rover's rocker-bogie suspension had no validated wheel-ground contact guarantee on uneven terrain, making it unreliable for real deployment.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Used ADAMS dynamic simulation to validate ground-contact constraints, then wrote a Simulated Annealing routine in Octave to optimise key link-length parameters for maximum step-climbing height.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Quantified a measurable improvement in step-climbing ability. Findings published in Journal of The Institution of Engineers (India): Series C (2024).</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">ADAMS</span><span class="tile-tag">Simulated Annealing</span><span class="tile-tag">Octave</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('reverseEngModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/prolific 3d tech.jpg" class="company-logo" alt="Prolific 3D Tech"><span class="tile-arrow">↗</span></div>
+          <h3>Can Filling Machine: Reverse Engineering</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">The client had a 50+ component Can Filling and Seaming Machine with no digital documentation making replication, maintenance, part replacement, and future modifications extremely difficult.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Physically measured all sub-assemblies, built fully constrained 3D SolidWorks models, and produced complete 2D GD&T manufacturing drawings with tolerance stack-ups and datum structures.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Delivered a ready-to-manufacture digital twin of the machine, with incorporated design improvements over the original, giving the client full CAD documentation for the first time.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">GD&T</span><span class="tile-tag">Reverse Engineering</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACADEMIC -->
+  <div class="project-category reveal">
+    <div class="category-heading">
+      <span class="category-heading-icon">▸</span>
+      <span class="category-heading-text">Academic Projects</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-tile" onclick="openModal('ikModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/WPI.png" class="company-logo" alt="WPI"><span class="tile-arrow">↗</span></div>
+          <h3>6-DOF IK Solver Benchmarking for VR Teleoperation</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Real-time VR-to-robot teleoperation demands fast, reliable IK but no benchmarked comparison existed for which solver best balances speed, convergence, and accuracy on a 6-DOF arm.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Implemented four IK solvers (Newton-Raphson, I-DLS, SVD-DLS, PSO) from scratch in Matlab, then built a Unity–ROS–MATLAB VR teleoperation pipeline and a performance evaluation framework.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Produced a rigorous benchmark across convergence rate, computation time, and joint-space efficiency giving a clear recommendation for real-time teleoperation use.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Python</span><span class="tile-tag">ROS2 / MATLAB</span><span class="tile-tag">Unity / VR</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('ccrrtModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/WPI.png" class="company-logo" alt="WPI"><span class="tile-arrow">↗</span></div>
+          <h3>Chance Constrained RRT Motion Planner</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Standard RRT planners assume deterministic robot state a critical flaw when sensors and actuators introduce Gaussian uncertainty that can lead to unsafe collisions.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Implemented a full CC-RRT planner with uncertainty propagation along sampled trajectories, probabilistic collision checking with configurable risk thresholds, and dynamic obstacle handling using Docker and GitHub for reproducible development.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Generated collision-safe trajectories across varied obstacle environments, with validated probabilistic safety guarantees even under significant state uncertainty.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Motion Planning</span><span class="tile-tag">Python</span><span class="tile-tag">Docker / GitHub</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('ros2Modal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/WPI.png" class="company-logo" alt="WPI"><span class="tile-arrow">↗</span></div>
+          <h3>Robotic Arm Control: ROS 2</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Controlling a robot arm precisely in Cartesian space requires solving velocity-level kinematics and building a responsive controller challenging to implement from scratch in a live ROS 2 environment.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Built three ROS 2 Python nodes covering Jacobian-based velocity kinematics, incremental joint control, and linear path execution. Then implemented a PD controller from scratch for a DYNAMIXEL actuator running at 100 Hz.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Achieved fast convergence and minimal overshoot (Kp=0.19, Kd=0.03) across all reference tests, with full 10s data logging and visualisation confirming stable closed-loop behaviour.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">ROS2</span><span class="tile-tag">Python</span><span class="tile-tag">Jacobian / IK</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('cookingArmModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
+          <h3>Autonomous Cooking System: Undergrad Thesis</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Automating cooking requires precise manipulation, ingredient dispensing, and thermal tolerance capabilities rarely integrated into affordable domestic robots.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Designed a 6-DOF PUMA arm from first principles using Simulated Annealing for link optimisation, validated structural and thermal performance with ANSYS FEA, simulated IK in Webots, and built a physical prototype with Arduino control.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Achieved ±1° motion accuracy and 0.7 kg payload, validating a low-cost autonomous cooking robot prototype; research published in Materials Today: Proceedings (ICAME 2022).</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">Webots / ROS</span><span class="tile-tag">ANSYS / FEA</span><span class="tile-tag">Arduino / PID</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('crimpingModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
+          <h3>Pulley-Driven Crimping Tool</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Wire crimping in manufacturing requires large repetitive forces that cause repetitive strain injury existing manual tools offered no force multiplication or automation.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Designed a 5-pulley rope-drive attachment actuated by a DC motor, selected all mechanical components (rope, bearings, spring return) from first principles, and produced full SolidWorks drawings with GD&T.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Delivered 1000 N crimping force with a mechanical advantage of 6 full crimp cycle in 3.9 s, within the 10 s requirement completely eliminating manual effort.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">Pulley / Linkage</span><span class="tile-tag">Machine Design</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+      <div class="project-tile" onclick="openModal('gearboxModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/SPCE.png" class="company-logo" alt="SPCE"><span class="tile-arrow">↗</span></div>
+          <h3>Two-Stage Reverted Helical Gearbox</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block">
+            <div class="tile-story-label why">The Problem</div>
+            <p class="tile-story-text">Design a gearbox to reduce speed from 1000 RPM to 179 RPM while meeting strict requirements for efficiency, noise, operating temp, and service life using off-the-shelf components.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label what">What I Did</div>
+            <p class="tile-story-text">Performed full gearbox design from first principles including gear sizing, shaft design under combined loading, SKF bearing selection, lubrication planning, and detailed SOLIDWORKS CAD with GD&T drawings.</p>
+          </div>
+          <div class="tile-story-block">
+            <div class="tile-story-label result">Outcome</div>
+            <p class="tile-story-text">Achieved 95% efficiency, >17,800 hr gear life, 12,500–21,500 hr bearing life, <85 dB noise, and 329 kg system weight at lowest cost while meeting all design specifications.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">SolidWorks</span><span class="tile-tag">Helical Gear Design</span><span class="tile-tag">GrabCAD</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <div class="project-category reveal">
+    <div class="category-heading">
+      <span class="category-heading-icon">▸</span>
+      <span class="category-heading-text">Leadership &amp; Competition</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-tile" onclick="openModal('roboconModal')">
+        <div class="tile-header">
+          <div class="tile-top"><img src="logos/SPCE ROBOCON.jpg" class="company-logo" alt="SPCE ROBOCON"><span class="tile-arrow">↗</span></div>
+          <h3>SPCE ROBOCON: Technical Member &amp; Team Captain</h3>
+        </div>
+        <div class="tile-story">
+          <div class="tile-story-block" style="border-bottom:none">
+            <p class="tile-story-text">Participated for 3 years in the national DD Robocon competition as a Technical Team Member (AIR 9 – 2019 & 2020) and later as Team Captain (AIR 19 – 2021) leading a 35-member team. Designed mechanisms including a rugby-ball kicking system using elastic energy and a claw mechanism for ball transfer, and maintained and supported the mechanical subsystems of a quadruped robot used for locomotion tasks. Performed CAD design and kinematic/dynamic analysis using ADAMS and ANSYS, followed by prototyping and testing of competition robots.</p>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <div class="tile-tags"><span class="tile-tag">ADAMS / ANSYS</span><span class="tile-tag">CATIA V5</span><span class="tile-tag">Team Leadership</span></div>
+          <span class="tile-details-btn">Full details ↗</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ALL MODALS (PRESERVED EXACTLY FROM UPLOADED FILE) ── -->
+
+<div id="visionModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('visionModal')">&times;</button>
+    <h2>Vision-Based Label Inspection System</h2>
+    <p class="modal-subtitle">EssilorLuxottica–GENTEX · Automation Support Intern · May 2025–Present</p>
+
+    <p class="modal-text">Deployed automated vision-based inspection checks on a high-throughput manufacturing line to ensure label correctness and traceability before shipment, directly improving production quality and reducing mispack risk reaching customers.</p>
+    <ul class="modal-highlights">
+      <li>Designed and tuned vision inspection logic for label presence, orientation, and barcode validation using Keyence Vision System and assiting in integration with Aleen-Bradley PLC</li>
+      <li>Iteratively refined detection parameters through structured testing to reduce false-pass rates</li>
+      <li>Designed, CAD-modeled, and fabricated custom mounting fixtures to seamlessly integrate cameras into existing automation systems</li>
+      <li>Produced clear technical documentation for maintenance and cross-team knowledge transfer</li>
+    </ul>
+  </div>
+</div>
+
+<div id="robotProgModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('robotProgModal')">&times;</button>
+    <h2>Industrial Robot Programming &amp; Maintenance</h2>
+    <p class="modal-subtitle">EssilorLuxottica–GENTEX · Automation Support Intern · May 2025–Present</p>
+    <p class="modal-text">Troubleshot and programmed robotic arms and automated production-line equipment across a multi-robot manufacturing environment. Resolved mechanical and software faults to restore operation and minimize downtime.</p>
+    <ul class="modal-highlights">
+      <li>Performed a comprehensive analysis of the legacy Mitsubishi robotic system, mapping I/O signals, PLC communication bits, and motion logic to understand tray-handling operations across the MagneMotion and conveyor systems</li>
+      <li>Migrated and restructured the complete control program into the Epson platform, replacing deeply nested subroutines with modular functions, eliminating redundant routines, and improving overall code clarity and maintainability</li>
+      <li>Redesigned the robot homing sequence using joint-region logic and safe-height validation to ensure predictable crash recovery, eliminate manual pendant intervention, and safely handle trays during fault conditions</li>
+      <li>Implemented tool-centered coordinate systems (TCP frames), validated motion sequences through full simulation and physical testing, and developed detailed documentation including standardized I/O naming, comments, and system configuration references for long-term maintainability</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/TR3 Homing_1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div id="innovationStoryModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('innovationStoryModal')">&times;</button>
+    <h2>Competition Robots: The Innovation Story</h2>
+    <p class="modal-subtitle">The Innovation Story, India · Mechanical Design Engineer (Robotics) · Aug 2023–Apr 2024</p>
+    <figure class="modal-figure">
+      <img src="Images/Blue bot builder Rendered image.JPG" class="modal-img" alt="Blue Bot Builder: SolidWorks Render">
+      <figcaption class="modal-caption">Blue Bot Builder: SolidWorks Render</figcaption>
+    </figure>
+    <figure class="modal-figure">
+      <img src="Images/Grasshopper Rendered image.JPG" class="modal-img" alt="Grasshopper: SolidWorks Render">
+      <figcaption class="modal-caption">Grasshopper: SolidWorks Render</figcaption>
+    </figure>
+    <p class="modal-text">Designed and manufactured two competition robots, <strong style="color:var(--text)">Blue Bot Builder</strong> and <strong style="color:var(--text)">Grasshopper</strong>, for national-level game challenges, achieving ~90% reliability within three months entirely through in-house manufacturing, while simultaneously coaching 20 students.</p>
+    <ul class="modal-highlights">
+      <li>Blue Bot Builder: precise actuators and rigid modular chassis optimised for repeatability under competition pressure</li>
+      <li>Grasshopper: linkage-based mechanism for a dynamic traversal challenge, iterated rapidly through prototyping</li>
+      <li>~90% mechanism reliability from concept to competition in 3 months using CNC, lathe, and 3D printing</li>
+      <li>Mentored 20 students across grade levels, teaching physics, SolidWorks CAD, and manufacturing principles</li>
+      <li>Team placed 4th nationally in the competition</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/innovation_story.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div id="harvesterModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('harvesterModal')">&times;</button>
+    <h2>Autonomous Onion Harvester</h2>
+    <p class="modal-subtitle">Technology Innovation Hub, IIT Bombay · Project Research Assistant · Jun 2022–Aug 2023</p>
+    <figure class="modal-figure">
+      <img src="Images/Harvester rendered image.JPG" class="modal-img" alt="Autonomous Onion Harvester: CAD Render">
+      <figcaption class="modal-caption">Autonomous Onion Harvester: CAD Render</figcaption>
+    </figure>
+    <p class="modal-text">Designed and manufactured a complete autonomous robotic harvesting system for small farm environments. The robot navigates fields independently, harvests onions with a custom end-effector, and returns to base automatically on low battery.</p>
+    <ul class="modal-highlights">
+      <li>Developed an Energy-Aware Path Planning algorithm to maximise field coverage per charge cycle</li>
+      <li>Implemented return-to-base on low battery for uninterrupted field operation</li>
+      <li>Led motor, battery, and BMS selection; created manufacturing drawings; identified vendors and managed procurement</li>
+      <li>Designed and fabricated the full mechanical system: drivetrain, chassis, and harvesting mechanism</li>
+      <li>Published in IEEE Transactions on AgriFood Electronics (2024)</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/Harvester.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video controls class="modal-video">
+      <source src="Images/Harvester_rotating.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div id="roverModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('roverModal')">&times;</button>
+    <h2>Bomb Disposal Rover &amp; Rocker-Bogie Optimization</h2>
+    <p class="modal-subtitle">Technology Innovation Hub, IIT Bombay · Project Research Assistant · Jun 2022–Aug 2023</p>
+    <p class="modal-text">Two related rover projects targeting terrain adaptability. Redesigned suspension of a bomb disposal rover using ADAMS dynamic analysis, then optimised a rocker-bogie mechanism using Simulated Annealing in Octave for maximum step-climbing performance.</p>
+    <ul class="modal-highlights">
+      <li>Used ADAMS dynamic analysis to validate rocker-bogie mechanism ensuring at least one side's wheels always maintain ground contact</li>
+      <li>Built a Simulated Annealing routine in Octave to optimise key rocker-bogie design parameters</li>
+      <li>Quantified step-climbing improvement through systematic parameter sweeps</li>
+      <li>Published in Journal of The Institution of Engineers (India): Series C (2024)</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/Backpack rover Test_v2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div id="reverseEngModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('reverseEngModal')">&times;</button>
+    <h2>Can Filling Machine: Reverse Engineering</h2>
+    <p class="modal-subtitle">Prolific 3D Tech · Intern Design Engineer · Jun–Jul 2021</p>
+    <figure class="modal-figure">
+      <img src="Images/Can seaming and filling machine.jpg" class="modal-img" alt="Can Filling and Seaming Machine: SolidWorks Model">
+      <figcaption class="modal-caption">Can Filling &amp; Seaming Machine: SolidWorks Reverse-Engineering Model</figcaption>
+    </figure>
+    <p class="modal-text">Led reverse engineering of a 50+ component Can Filling and Seaming Machine. Took precise physical measurements of all sub-assemblies and produced complete 3D CAD models and 2D manufacturing drawings in SolidWorks ready for fabrication.</p>
+    <ul class="modal-highlights">
+      <li>Measured all 50+ components precisely to capture accurate geometry and fit conditions</li>
+      <li>Built fully constrained 3D SolidWorks assemblies with correct tolerances and mating conditions</li>
+      <li>Created 2D drawings with comprehensive GD&amp;T including tolerance stack-ups, fits, and datum structures</li>
+      <li>Identified and incorporated design modifications to improve upon the original</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/SA3 assembly.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video controls class="modal-video">
+      <source src="Images/SA6 Subassembley.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div id="ikModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('ikModal')">&times;</button>
+    <h2>6-DOF IK Solver Benchmarking for VR Teleoperation</h2>
+    <p class="modal-subtitle">WPI · Graduate Project (RBE 500) · Oct–Dec 2024</p>
+    <p class="modal-text">Implemented and benchmarked four IK solvers for the OpenManipulator-X robot using standard Denavit-Hartenberg (DH) parameters and ROS 2. Built a full VR-to-robot teleoperation pipeline for real-time manipulation.</p>
+    <ul class="modal-highlights">
+      <li>Implemented Newton-Raphson (NR), I-DLS, SVD-DLS, and Particle Swarm Optimization (PSO) solvers</li>
+      <li>FK node subscribes to /joint_states, computes end-effector pose via DH conventions, publishes to /end_effector_pose</li>
+      <li>IK service (/calculate_ik) accepts desired end-effector pose and returns joint angles using quaternion-based orientation handling with error checks</li>
+      <li>Validated across 3 distinct joint configurations; pick-and-place task completed via /goal_tool_control</li>
+      <li>Developed VR-to-robot pipeline using Unity, ROS, and MATLAB for real-time teleoperation</li>
+      <li>Built performance evaluation framework analysing computation time, convergence, and joint-space efficiency</li>
+    </ul>
+    <div class="modal-actions">
+      <a href="Reports/Dynamics_Final_Report.pdf" class="btn btn-primary" download>Download Report ↓</a>
+    </div>
+  </div>
+</div>
+
+<div id="ccrrtModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('ccrrtModal')">&times;</button>
+    <h2>Chance Constrained RRT Motion Planner</h2>
+    <p class="modal-subtitle">WPI · Graduate Project · March–May 2025</p>
+    <p class="modal-text">Implemented a Chance-Constrained RRT (CC-RRT) motion planner accounting for Gaussian state uncertainty, probabilistic collision checks, and dynamic obstacles, using Docker and GitHub for reproducible CI/CD-style development.</p>
+    <ul class="modal-highlights">
+      <li>Implemented CC-RRT with Gaussian uncertainty propagation along sampled trajectories</li>
+      <li>Integrated probabilistic collision checking with configurable risk tolerance thresholds</li>
+      <li>Handled dynamic obstacles within the uncertainty-aware planning framework</li>
+      <li>Validated collision-safe trajectories across varied obstacle configurations</li>
+      <li>Used Docker and GitHub for reproducible, CI/CD-style development</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/Final CC-RRT.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="modal-actions">
+      <a href="Reports/Motion_Planning_Final_project.pdf" class="btn btn-primary" download>Download Report ↓</a>
+    </div>
+  </div>
+</div>
+
+<div id="ros2Modal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('ros2Modal')">&times;</button>
+    <h2>Robotic Arm Control: ROS 2</h2>
+    <p class="modal-subtitle">WPI · Graduate Projects (RBE 500) · Oct–Dec 2024</p>
+    <p class="modal-text">A series of progressively complex ROS 2 control implementations for the OpenManipulator-X, from velocity-level kinematics and linear path motion through to a from-scratch PD controller running at 100 Hz in current control mode.</p>
+    <ul class="modal-highlights">
+      <li>Built 3 Python ROS2 nodes: vel_kinematics (Jacobian &amp; twist), vel_calc (incremental joint positions), vel_pub (constant twist publisher) for linear Cartesian path execution</li>
+      <li>Implemented Jacobian matrix and Moore-Penrose pseudoinverse for joint-velocity resolution</li>
+      <li>PD controller for Actuator 4 in current control mode (DYNAMIXEL X, 1 MHz baud); effort = Kp·error − Kd·derivative</li>
+      <li>Tuned Kp = 0.19, Kd = 0.03 with fast convergence and minimal overshoot across 3 reference tests: 930 to 2000, 2180 to 1500, and 930 to 1800 encoder units</li>
+      <li>Logged 10 s of data at 100 Hz; visualised with Python/matplotlib</li>
+    </ul>
+    <div class="video-placeholder">
+      <div class="video-placeholder-icon">▶</div>
+      <div class="video-placeholder-text">
+        <strong>Video: drop in when ready</strong>
+        Save file as: <code>videos/ros2_control.mp4</code>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <a href="Reports/Velocity-Level Kinematics and Robot Linear Path Movement_RBE500.pdf" class="btn btn-primary" download>Report: Velocity Kinematics ↓</a>
+      <a href="Reports/Implementation of a PD Controller_RBE500.pdf" class="btn btn-primary" download>Report: PD Controller ↓</a>
+      <a href="Reports/Forward and Inverse Kinematics Implementation for OpenManipulator-X_RBE500.pdf" class="btn btn-primary" download>Report: FK / IK ↓</a>
+    </div>
+  </div>
+</div>
+
+<div id="cookingArmModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('cookingArmModal')">&times;</button>
+    <h2>Autonomous Cooking System: Undergrad Thesis</h2>
+    <p class="modal-subtitle">SPCE (Mumbai) · Undergrad Thesis · Aug 2021–May 2022</p>
+    <figure class="modal-figure">
+      <img src="Images/Cooking system Complete model.JPG" class="modal-img" alt="Autonomous Cooking System: Full CAD Assembly">
+      <figcaption class="modal-caption">Full System CAD Assembly: Robot Arm, Dispensers &amp; Cooktop</figcaption>
+    </figure>
+    <p class="modal-text">Designed, fabricated, and validated a 6-DOF PUMA-configured robotic arm for autonomous culinary assistance, targeting three Indian recipes (Bhindi Masala, Pav Bhaji, Dosa). The system integrates a carousel solid-ingredient dispenser, liquid/batter dispensers, and a three-fingered claw end-effector.</p>
+    <ul class="modal-highlights">
+      <li>Optimised link lengths via Simulated Annealing; shoulder torque = 616.89 Ncm, elbow = 357.22 Ncm, wrist = 239.93 Ncm at full extension</li>
+      <li>ANSYS static structural FEA on aluminium links (1 mm wall) and transient thermal analysis, validated within ~8% error across 30–125°C</li>
+      <li>Simulated IK using geometric kinematic decoupling in Webots (Python); C²-continuous sin² velocity profiles for smooth trajectories</li>
+      <li>Arduino Mega control with 10-turn potentiometers; 0.4° sensor resolution, corrected to ±1° via linear regression calibration</li>
+      <li>Payload ≥42.7 kg-cm at joint 1; 5 of 6 DOF operational on physical prototype</li>
+      <li>Published in Materials Today: Proceedings, ICAME22 (2022), Vol. 68, Part 6, pp. 1930–1945</li>
+    </ul>
+    <video controls class="modal-video">
+      <source src="Images/Robotic arm B_Tech.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="modal-actions">
+      <a href="Reports/Report_Final year project.pdf" class="btn btn-primary" download>Download Report ↓</a>
+    </div>
+  </div>
+</div>
+
+<div id="crimpingModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('crimpingModal')">&times;</button>
+    <h2>Pulley-Driven Crimping Tool Attachment</h2>
+    <p class="modal-subtitle">Machine Design Course Project · SPCE (Mumbai)</p>
+    <figure class="modal-figure">
+      <img src="Images/Crimping tool Rendered Image.JPG" class="modal-img" alt="Crimping Tool: SolidWorks Render">
+      <figcaption class="modal-caption">Rendered Assembly: SolidWorks</figcaption>
+    </figure>
+    <figure class="modal-figure">
+      <img src="Images/Crimping tool exploded view.jpg" class="modal-img" alt="Crimping Tool: Exploded View with BOM">
+      <figcaption class="modal-caption">Exploded View with Bill of Materials (20 components)</figcaption>
+    </figure>
+    <p class="modal-text">Designed a motorised crimping tool attachment to eliminate the large manual forces that cause repetitive strain injury in manufacturing workers. The device uses a 5-pulley rope drive actuated by a DC motor and Li-Po battery.</p>
+    <ul class="modal-highlights">
+      <li>5-pulley rope drive provides mechanical advantage of 6; max load 1000 N (actual peak 678.76 N incl. self-weight and spring force)</li>
+      <li>Motor: Rhino IG32 12V, 686.7 Ncm at 30 RPM, full crimp cycle in 3.9 s (within 10 s requirement)</li>
+      <li>Wire rope: 6x19 fibre core, 3 mm dia, D/dr = 23, static FOS = 5.48, fatigue life 90,000 bends (~7,500 crimp cycles)</li>
+      <li>SKF 608 bearing, relubrication interval 12,300 hrs; 4-bar spring return (k = 0.1 N/mm) for passive open reset</li>
+      <li>Envelope: 300x100x150 mm; weight &lt;5 kg; 12V Li-Po with DPDT forward/off/reverse switch</li>
+    </ul>
+    <div class="modal-actions">
+      <a href="Reports/Crimping Tool mechanization system (Group 15).pdf" class="btn btn-primary" download>Download Report ↓</a>
+      <a href="https://grabcad.com/manav.mepani-1/models" class="btn btn-ghost" target="_blank">View on GrabCAD ↗</a>
+    </div>
+  </div>
+</div>
+
+<div id="gearboxModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('gearboxModal')">&times;</button>
+    <h2>Two-Stage Reverted Helical Gearbox</h2>
+    <p class="modal-subtitle">Machine Design Course Project · SPCE (Mumbai)</p>
+    <figure class="modal-figure">
+      <img src="Images/Two stage reverted Gearbox.JPG" class="modal-img" alt="Two-Stage Helical Gearbox: SolidWorks Render">
+      <figcaption class="modal-caption">Two-Stage Reverted Helical Gearbox: SolidWorks Render</figcaption>
+    </figure>
+    <figure class="modal-figure">
+      <img src="Images/Gearbox exploded view.PNG" class="modal-img" alt="Gearbox Exploded View with BOM">
+      <figcaption class="modal-caption">Exploded View with Bill of Materials</figcaption>
+    </figure>
+    <p class="modal-text">Designed a complete two-stage reverted helical gearbox delivering 49 kW at 95% efficiency, reducing speed from 1000 RPM to 179 RPM (ratio 5.59:1). All components designed from first principles against a full set of client specifications.</p>
+    <ul class="modal-highlights">
+      <li>Gears: 19-45 tooth combo (Python-optimised), mn = 8 mm, helix 25°, 20° pressure angle; 0.55% Carbon Chromium Steel, UTS 850 MPa</li>
+      <li>Gear life: 17,833 hrs (critical Gear 3, pitting), Gear 1 over 5.11×10⁶ hrs; Shigley's YN/ZN factors at 95% reliability</li>
+      <li>Shafts (AISI 1040): Input ø50/30 mm hollow (L=178 mm), Intermediate ø80/48 mm (L=402 mm), Output ø90/54 mm (L=194 mm)</li>
+      <li>SKF bearings: 6210-2Z / 6216-2Z / 6218-2Z, lives 14,600 / 21,500 / 12,500 hrs; MT33 grease life up to 20,600 hrs</li>
+      <li>Lubrication: Shell Omala S2 G 320, calculated life 9,000 hrs; total weight 329.3 kg; noise &lt;85 dB at 1 m</li>
+    </ul>
+    <div class="modal-actions">
+      <a href="Reports/Two Stage reverted Gearbox design.pdf" class="btn btn-primary" download>Download Report ↓</a>
+      <a href="https://grabcad.com/manav.mepani-1/models" class="btn btn-ghost" target="_blank">View on GrabCAD ↗</a>
+    </div>
+  </div>
+</div>
+
+<div id="roboconModal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('roboconModal')">&times;</button>
+    <h2>SPCE ROBOCON: Technical Member &amp; Team Captain</h2>
+    <p class="modal-subtitle">SPCE (Mumbai) · Technical Member Sep 2018–Aug 2020 · Team Captain Aug 2020–Aug 2021</p>
+    <figure class="modal-figure">
+      <img src="Images/Robocon.png" class="modal-img" alt="2021 Throwing Robot: CATIA V5 Render">
+      <figcaption class="modal-caption">2019 Quadruped and Throwing Robots</figcaption>
+    </figure>
+    <p class="modal-text">Four years of national DD Robocon competition, progressing from technical team member to team captain. Managed the full project lifecycle including design, ADAMS/ANSYS analysis, fabrication, and 35-person team coordination through COVID-19 restrictions.</p>
+    <ul class="modal-highlights">
+      <li><strong style="color:var(--text)">Team Captain, AIR 19 – Robocon 2021</strong> (“Throwing Arrows Into Pots”): Led a 35-member team in designing and building a robot capable of accurately launching projectiles into targets. Used ADAMS simulation to validate a launch speed of 7.5 m/s and a ~58.6° launch angle for a 5 m range, achieving >97% shot repeatability</li>
+      <li><strong style="color:var(--text)">Technical Member, AIR 9 – Robocon 2020</strong> (“Robo Rugby 7s”): Designed a spring-loaded kicking mechanism to launch a rugby ball through goal posts using stored elastic energy. Developed a coupling/decoupling mechanism for automatic reloading and validated chassis stiffness in ANSYS with <0.45 mm deformation.</li>
+      <li><strong style="color:var(--text)">Technical Member, AIR 9 – Robocon 2019</strong> (“Sharing the Knowledge”): Designed a launch mechanism to throw Shagai (game object). Maintained mechanical subsystems of a quadruped robot capable of creep and trot gaits, validated through ADAMS simulations.</li>
+      <li>Worked with Holonomic 3-wheel and 4-wheel drive (ø100 mm omni wheels); dual-camera + red laser image processing for distance estimation, and TFMini LIDAR for autonomous positioning</li>
+    </ul>
+    <div class="modal-actions">
+      <a href="Reports/Design Details Document_ROBOCON (2019).pdf" class="btn btn-primary" download>Report: Robocon 2019 ↓</a>
+      <a href="Reports/Design Details Document_SPCE_Robocon (2020).pdf" class="btn btn-primary" download>Report: Robocon 2020 ↓</a>
+      <a href="Reports/Design Detail Document_team_SPCE Robocon (2021).pdf" class="btn btn-primary" download>Report: Robocon 2021 ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── PUBLICATIONS ── -->
+<section id="publications">
+  <div class="section-header reveal">
+    <div class="section-label">Publications</div>
+    <h2>Peer-Reviewed Research</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="publications-list">
+    <div class="publication reveal">
+      <div>
+        <p class="pub-journal">IEEE Transactions on AgriFood Electronics</p>
+        <h3>Energy- and Safety-Aware Operation of Battery-Powered Autonomous Robots in Agriculture</h3>
+        <p class="pub-meta">2024 · DOI: 10.1109/tafe.2024.3353597</p>
+      </div>
+      <a href="https://doi.org/10.1109/tafe.2024.3353597" target="_blank">View →</a>
+    </div>
+    <div class="publication reveal">
+      <div>
+        <p class="pub-journal">Journal of The Institution of Engineers (India): Series C</p>
+        <h3>Study of the Step Climbing Ability of a Rover with Rocker Bogie Mechanism</h3>
+        <p class="pub-meta">2024 · Pages 1–17 · DOI: 10.1007/s40032-023-01021-z</p>
+      </div>
+      <a href="https://doi.org/10.1007/s40032-023-01021-z" target="_blank">View →</a>
+    </div>
+    <div class="publication reveal">
+      <div>
+        <p class="pub-journal">Materials Today: Proceedings · ICAME22 Conference</p>
+        <h3>Design of Robot Arm for Domestic Culinary Assistance</h3>
+        <p class="pub-meta">Volume 68, Part 6 · 2022 · Pages 1930–1945</p>
+      </div>
+      <a href="https://www.sciencedirect.com/science/article/pii/S221478532205307X" target="_blank">View →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-label">Contact</div>
+    <h2 class="playfair-heading">Engineering Ideas Into Reality.</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="contact-intro reveal">Open to opportunities in robotics, mechanical design, industrial automation, and Hardware Intergration. Currently based in Worcester, MA (Open to relocate) and available from May 2026.</p>
+  <div class="contact-grid reveal" style="transition-delay:0.1s; grid-template-columns: repeat(3,1fr);">
+    <a href="http://www.linkedin.com/in/manav-mepani" class="contact-link" target="_blank">
+      <span class="contact-platform">LinkedIn</span>
+      <span class="contact-handle">Manav Mepani</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="mailto:mepanimanav@gmail.com" class="contact-link">
+      <span class="contact-platform">Email</span>
+      <span class="contact-handle">mepanimanav@gmail.com</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="tel:+17742289813" class="contact-link">
+      <span class="contact-platform">Phone</span>
+      <span class="contact-handle">+1 (774) 228-9813</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="https://github.com/ManavMepani20" class="contact-link" target="_blank">
+      <span class="contact-platform">GitHub</span>
+      <span class="contact-handle">ManavMepani20</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+    <a href="https://grabcad.com/manav.mepani-1/models" class="contact-link" target="_blank">
+      <span class="contact-platform">GrabCAD</span>
+      <span class="contact-handle">View CAD Models</span>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>Manav Mepani · Mechatronics Engineer · WPI</span>
+  <span>Worcester, MA · © 2026</span>
+</footer>
+
+<script>
+/* CURSOR */
+const isFine = window.matchMedia('(pointer: fine)').matches;
+if (isFine) {
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function tick(){
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,.project-tile,.journey-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2.2)'; ring.style.opacity='0'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)';   ring.style.opacity='1'; });
+  });
+}
+
+/* MODALS */
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal').forEach(m=>{ m.addEventListener('click', e=>{ if(e.target===m) closeModal(m.id); }); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id)); });
+
+/* HAMBURGER */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click', ()=>{
+  const open = navLinks.classList.toggle('is-open');
+  navToggle.classList.toggle('is-open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+function closeNav() { navLinks.classList.remove('is-open'); navToggle.classList.remove('is-open'); document.body.style.overflow=''; }
+document.addEventListener('click', e=>{ if(navLinks.classList.contains('is-open') && !document.getElementById('mainNav').contains(e.target)) closeNav(); });
+
+/* JOURNEY FILTER */
+document.querySelectorAll('.j-filter').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.j-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.journey-card').forEach(card=>{
+      card.classList.toggle('hidden', f!=='all' && card.dataset.type!==f);
+    });
+  });
+});
+
+/* JOURNEY CARD EXPAND */
+function toggleCard(toggleEl, expandId) {
+  const expand = document.getElementById(expandId);
+  const isOpen = expand.classList.contains('open');
+  expand.classList.toggle('open', !isOpen);
+  toggleEl.classList.toggle('expanded', !isOpen);
+  toggleEl.querySelector('span:first-child').textContent = isOpen ? 'Click to expand ↗' : 'Click to collapse ↗';
+}
+
+/* SKILLS FILTER */
+document.querySelectorAll('.s-filter').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.s-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.skill-pill').forEach(pill=>{
+      pill.classList.toggle('hidden', cat!=='all' && pill.dataset.cat!==cat);
+    });
+  });
+});
+
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* COUNTER ANIMATION */
+const statsObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      statsObserver.unobserve(e.target);
+      e.target.querySelectorAll('.stat-num').forEach(el=>{
+        const inner = el.innerHTML;
+        const spanMatch = el.querySelector('span');
+        const spanHtml = spanMatch ? spanMatch.outerHTML : '';
+        const numText = el.textContent.replace(spanMatch ? spanMatch.textContent : '','').trim();
+        const num = parseInt(numText.replace(/[^0-9]/g,''),10);
+        if(!num) return;
+        let count = 0;
+        const inc = num / 60;
+        const timer = setInterval(() => {
+          count = Math.min(count + inc, num);
+          el.innerHTML = Math.floor(count) + spanHtml;
+          if (count >= num) clearInterval(timer);
+        }, 16);
+      });
+    }
+  });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObserver.observe(statsEl);
+</script>
+</body>
+</html>
