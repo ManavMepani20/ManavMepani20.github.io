@@ -1534,12 +1534,12 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     </figure>
     <p class="modal-text">Designed, fabricated, and validated a 6-DOF PUMA-configured robotic arm for autonomous culinary assistance, targeting three Indian recipes (Bhindi Masala, Pav Bhaji, Dosa). The system integrates a carousel solid-ingredient dispenser, liquid/batter dispensers, and a three-fingered claw end-effector.</p>
     <ul class="modal-highlights">
-      <li>Optimised link lengths via Simulated Annealing; shoulder torque = 616.89 Ncm, elbow = 357.22 Ncm, wrist = 239.93 Ncm at full extension</li>
-      <li>ANSYS static structural FEA on aluminium links (1 mm wall) and transient thermal analysis, validated within ~8% error across 30–125°C</li>
-      <li>Simulated IK using geometric kinematic decoupling in Webots (Python); C²-continuous sin² velocity profiles for smooth trajectories</li>
-      <li>Arduino Mega control with 10-turn potentiometers; 0.4° sensor resolution, corrected to ±1° via linear regression calibration</li>
-      <li>Payload ≥42.7 kg-cm at joint 1; 5 of 6 DOF operational on physical prototype</li>
-      <li>Published in Materials Today: Proceedings, ICAME22 (2022), Vol. 68, Part 6, pp. 1930–1945</li>
+      <li>Optimized robotic arm link lengths using a Simulated Annealing algorithm, achieving required torque capacities of 616.9 N·cm (shoulder), 357.2 N·cm (elbow), and 239.9 N·cm (wrist) at full extension</li>
+      <li>Performed structural and thermal analysis in ANSYS on lightweight aluminum links (1 mm wall thickness); simulation results matched experimental temperatures within ~8% across a 30–125°C range</li>
+      <li>Developed and simulated inverse kinematics in Webots using Python with geometric kinematic decoupling, implementing smooth C²-continuous sin² velocity profiles for stable robotic motion.</li>
+      <li>Built and controlled the physical prototype using an Arduino Mega with 10-turn potentiometers for joint sensing, achieving ~0.4° sensor resolution and improving joint accuracy to ±1° through calibration</li>
+      <li>Demonstrated payload capability of ≥42.7 kg·cm at the base joint, with 5 of the 6 degrees of freedom successfully operational on the prototype</li>
+      <li>Research outcomes were published in <em>Materials Today: Proceedings</em> (ICAME 2022), Vol. 68, Part 6, pp. 1930–1945</li>
     </ul>
     <video controls class="modal-video">
       <source src="Images/Robotic arm B_Tech.mp4" type="video/mp4">
