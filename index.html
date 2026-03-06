@@ -1547,6 +1547,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     </video>
     <div class="modal-actions">
       <a href="Reports/Report_Final year project.pdf" class="btn btn-primary" download>Download Report ↓</a>
+      <a href="https://grabcad.com/manav.mepani-1/models" class="btn btn-ghost" target="_blank">View on GrabCAD ↗</a>
     </div>
   </div>
 </div>
@@ -1790,25 +1791,24 @@ const statsObserver = new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       statsObserver.unobserve(e.target);
       e.target.querySelectorAll('.stat-num').forEach(el=>{
-        const inner = el.innerHTML;
         const spanMatch = el.querySelector('span');
-        const spanHtml = spanMatch ? spanMatch.outerHTML : '';
-        const numText = el.textContent.replace(spanMatch ? spanMatch.textContent : '','').trim();
-        const num = parseInt(numText.replace(/[^0-9]/g,''),10);
+        const spanHtml  = spanMatch ? spanMatch.outerHTML : '';
+        const numText   = el.textContent.replace(spanMatch ? spanMatch.textContent : '','').trim();
+        const num       = parseInt(numText.replace(/[^0-9]/g,''),10);
         if(!num) return;
         let count = 0;
         const inc = num / 60;
-        const timer = setInterval(() => {
+        const timer = setInterval(()=>{
           count = Math.min(count + inc, num);
           el.innerHTML = Math.floor(count) + spanHtml;
-          if (count >= num) clearInterval(timer);
+          if(count >= num) clearInterval(timer);
         }, 16);
       });
     }
   });
 }, { threshold: 0.5 });
 const statsEl = document.querySelector('.hero-stats');
-if (statsEl) statsObserver.observe(statsEl);
+if(statsEl) statsObserver.observe(statsEl);
 </script>
 </body>
 </html>
