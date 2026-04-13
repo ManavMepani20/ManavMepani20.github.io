@@ -455,12 +455,17 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 }
 
 /* ── MOBILE RESUME BUTTON (outside dropdown) ── */
-.nav-resume-mobile {
-  display: none;
-}
+.nav-resume-mobile { display: none; }
+.nav-mobile-right  { display: none; }
+
 @media (max-width: 768px) {
+  .nav-mobile-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .nav-resume-mobile {
-    display: inline-flex; align-items: right; gap: 5px;
+    display: inline-flex; align-items: center; gap: 5px;
     padding: 7px 13px;
     background: var(--accent-soft); border: 1px solid rgba(94,234,212,0.3);
     color: var(--accent); font-size: 0.68rem; font-weight: 500;
@@ -468,8 +473,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     transition: all 0.2s; white-space: nowrap;
   }
   .nav-resume-mobile:hover { background: var(--accent); color: var(--bg); }
-  /* hide the resume link inside the dropdown on mobile */
   .nav-links .nav-resume { display: none !important; }
+}
 }
 </style>
 </head>
@@ -481,10 +486,12 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 <!-- NAV -->
 <nav id="mainNav">
   <a class="logo" href="#">MM<span>.</span></a>
-  <a href="Resume (Manav Mepani).pdf" class="nav-resume-mobile" download>Resume ↓</a>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-    <span></span><span></span><span></span>
-  </button>
+    <div class="nav-mobile-right">
+     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+     </button>
+   <a href="Resume (Manav Mepani).pdf" class="nav-resume-mobile" download>Resume ↓</a>
+  </div>
   <div class="nav-links" id="navLinks">
     <a href="#about"       onclick="closeNav()">About</a>
     <a href="#journey"     onclick="closeNav()">Journey</a>
